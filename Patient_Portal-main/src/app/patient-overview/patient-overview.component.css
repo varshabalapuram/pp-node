@@ -1,0 +1,20 @@
+.card-header{
+    background-color:#215690e0 !important;
+}
+.vertical-scrollable {
+    position: absolute;
+    top: 120px;
+    bottom: 100px;
+    left: 180px;
+    width: 50%;
+    overflow-y: scroll; 
+  }
+  .card-body{
+    overflow-y: auto !important;
+    max-height: 250px !important;
+
+  }
+  .card-title{
+    color:whitesmoke
+  }
+  

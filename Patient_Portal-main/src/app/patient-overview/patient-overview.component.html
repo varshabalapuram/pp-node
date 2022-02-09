@@ -1,0 +1,303 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+    <div class="col-md-3">
+        <app-admin-navigation></app-admin-navigation>
+    </div>
+    <div class="col-md-9 " style="padding-top: 100px;">
+        <div class="container" style="background-color: #c6acac1f;">
+            <div class="row  gutter">
+                <div class="col-12 col-md-7 d-flex">
+                    <div class="card flex-fill w-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Patient Details</h5>
+                        </div>
+                        <div class="card ">
+                            <div class="row ">
+                                <div class="col-md-5 span6">
+                                    <!-- <div *ngIf="patientData"> -->
+                                    <div class="bg-white rounded  py-4 px-0" style="text-align: center;"><img
+                                            src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt=""
+                                            width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                                        <h5 style='text-align:center' class="mb-0">{{patientData.username}}</h5>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                <div><span class="large text-uppercase ">DOB :</span>
+                                                    <span class="large text-uppercase text-muted">
+                                                        {{patientData.dob}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div><span class="large text-uppercase ">Age:</span>
+                                                    <span
+                                                        class="large text-uppercase text-muted">{{patientData.age}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div><span class="large text-uppercase ">Weight:</span>
+                                                    <span class="large text-uppercase text-muted">
+                                                        {{patientData.weight}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div><span class="large text-uppercase ">Height:</span>
+                                                    <span
+                                                        class="large text-uppercase text-muted">{{patientData.height}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div><span class="large text-uppercase ">Gender:</span>
+                                                    <span
+                                                        class="large text-uppercase text-muted">{{patientData.gender}}</span>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                    <br />
+                                    <!-- </div> -->
+                                </div>
+
+                                <div class="col-md-7 px-3 " style="padding-top: 30px;">
+                                    <div class="card-block px-6">
+                                        <ul>
+
+                                            <li>
+                                                <div><span class="large text-uppercase ">Home Address </span></div>
+                                                <div><span class="small text-uppercase text-muted">
+                                                        {{patientData.address}}</span></div>
+                                            </li>
+                                            <br />
+                                            <li>
+                                                <div><span class="large text-uppercase">Mobile Number:</span></div>
+                                                <div><span class="small text-uppercase text-muted">
+                                                        {{patientData.phoneNo}}</span></div>
+                                            </li>
+                                            <br />
+                                            <li>
+                                                <div><span class="large text-uppercase ">Home Phone:</span></div>
+                                                <div><span class="small text-uppercase text-muted"> (123)
+                                                        456-7890</span></div>
+                                            </li>
+                                            <br />
+                                            <li>
+                                                <div><span class="large text-uppercase ">Email:</span></div>
+                                                <div><span
+                                                        class="small text-uppercase text-muted">{{patientData.email}}</span>
+                                                </div>
+                                            </li>
+                                            <br />
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center;" ><button  [disabled]="disable_visit"
+                                    [routerLink]="['/visitPatient',patient_name,patient_time]"
+                                    class="mt-auto btn btn-primary" >Visit Patient</button></div><br>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex flex-column">
+                    <div class="row ">
+                        <div class="col-md-6 col-lg-12  stretch-card">
+                            <div class="card card-rounded">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Sceduled Appointment</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row ">
+
+                                        <div class="col-sm-6" style="border-right:groove">
+
+                                            <div><span
+                                                    class="large text-uppercase text-muted">{{patientData.schedule_time
+                                                    | date:'medium'}}</span></div>
+
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+
+                                            <div><span class="large text-uppercase ">Status</span></div>
+                                            <div><span class="large text-uppercase text-muted">{{status}}</span></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md-6 col-lg-12  stretch-card col-md-offset-3" style="padding-top: 30px;">
+                            <div class="card card-rounded">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Patient Vitals</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div><i style="font-size: 70px; color:#007bff" class="fa fa-heart"></i>
+                                            </div>
+                                            <div><span class="large text-uppercase ">Blood Pressure</span></div>
+                                            <div><span class="large text-uppercase text-muted">{{blood_pressure}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div> <i style="font-size: 70px; color:#007bff" class="fa fa-heartbeat"></i>
+                                            </div>
+
+                                            <i class="bi bi-activity"></i>
+                                            <div><span class="large text-uppercase ">Pulse Rate</span></div>
+                                            <div><span
+                                                    class="large text-uppercase text-muted">{{pulse_rate}}</span><span
+                                                    class="small text-uppercase text-muted">BPM</span></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xl-4 col-sm-12 stretch-card grid-margin">
+                    <div class="card card-rounded" style="height: 300px;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Notes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="p-2">
+                                <p>
+                                    {{patientData.notes}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-xl-4 col-sm-6 stretch-card grid-margin">
+            <div class="card card-rounded" style="height: 300px;">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Current Medication</h5>
+                </div>
+              <div class="card-body pb-0">
+                <li *ngFor="let med of current_medication"><span class="large text-uppercase text-muted">{{med}}</span>
+                    <br/>
+                </li>
+              </div>
+            </div>
+        </div> -->
+                <div class="col-xl-4 col-sm-6 stretch-card grid-margin">
+
+                    <div class="card card-rounded" style="height: 300px;">
+
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">Current Medication & Allergies</h5>
+
+                        </div>
+
+                        <br>
+
+                        <h5>Medications</h5>
+
+                        <div class="card-body pb-0">
+
+                            <li *ngFor="let med of this.patientData.currentMedications"><span
+                                    class="large text-uppercase text-muted">{{med.drugName}}-{{med.drugStrength}}</span>
+
+                                <br />
+
+                            </li>
+
+                            <hr>
+
+                            <h5>Allergies</h5>
+
+                            <li *ngFor="let med of this.patientData.allergies"><span
+                                    class="large text-uppercase text-muted">{{med.allerginicity}}</span>
+
+                                <br />
+
+                            </li>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- <div class="col-xl-4 col-sm-6 stretch-card grid-margin">
+                    <div class="card" style="height: 300px;">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Reports</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div>
+
+                                <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
+                                    <div class="">
+                                        <h5 class="text-primary mb-0">Birth report.pdf</h5>
+                                        <p class="mb-0 text-muted text-small">View Report</p>
+                                    </div>
+                                    <button type="button" class="btn btn-facebook btn-xs">Download</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
+                                    <div class="">
+                                        <h5 class="text-primary mb-0">Diabetes</h5>
+                                        <p class="mb-0 text-muted text-small">View Report</p>
+                                    </div>
+                                    <button type="button" class="btn btn-facebook btn-xs">Download</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
+                                    <div class="">
+                                        <h5 class="text-primary mb-0">Typhoid</h5>
+                                        <p class="mb-0 text-muted text-small">View Report</p>
+                                    </div>
+                                    <button type="button" class="btn btn-facebook btn-xs">Download</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-3">
+                                    <div class="">
+                                        <h5 class="text-primary mb-0">X-ray.pdf</h5>
+                                        <p class="mb-0 text-muted text-small">View Report</p>
+                                    </div>
+                                    <button type="button" class="btn btn-facebook btn-xs">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-xl-4 col-sm-6 stretch-card grid-margin">
+
+                    <div class="card" style="height: 300px;">
+
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">Reports</h5>
+
+                        </div>
+
+                        <div class="card-body pb-0">
+
+                            <li *ngFor="let med of this.patientData.immunization"><span
+                                    class="large text-uppercase text-muted">{{med.vaccine}} Vaccineated</span>
+
+                                <br />
+
+                            </li>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <p-fileUpload name="myfile[]" url="./upload.php"></p-fileUpload>
+        </div>

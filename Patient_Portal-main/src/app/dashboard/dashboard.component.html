@@ -1,0 +1,694 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3 ">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9 " style="padding-top: 100px;">
+    <p-toast position="top-center" [style]="{marginTop: '30px'}"></p-toast>
+    <ng-container *ngIf="patientData.role=='Admin'">
+
+
+      <body>
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-4 col-xl-3 col-sm-4" (click)='getAppointments()'>
+              <div class="card order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Today's Appointments</h6>
+                  <h2 class="text-left"> <i class="fa fa-calendar-check-o mr-3 fa-fw"></i><span
+                      *ngIf="appointmentData">{{appointmentData.length}}</span></h2>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-xl-3 col-sm-4" (click)='newUserRequest()'>
+              <div class="card order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Registered Physicians</h6>
+                  <h2 class="text-left"><i class="fa fa-user-md mr-3 fa-fw"></i><span
+                      *ngIf="registeredUsers">{{registeredUsers.length}}</span></h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3 col-sm-4" (click)='getApprovedUsers()'>
+              <div class="card order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Active Physicians</h6>
+                  <h2 class="text-left"><i class="fa fa-address-card mr-3 fa-fw"></i><span
+                      *ngIf="approvedUsers">{{approvedUsers.length}}</span></h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3 col-sm-4" (click)='regPatients()'>
+              <div class="card order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Active Patients</h6>
+                  <h2 class="text-left"><i class="fa fa-users mr-3 fa-fw" aria-hidden="true"></i>
+                    <span *ngIf='registeredPatients'>{{registeredPatients.length}}</span>
+                  </h2>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4 ">
+
+                <div *ngIf='!registeredFlag && !approvedUsersFlag && !registeredPatientFlag && !appointmentsFlag'
+                  class="shadow-none p-3 mb-5 bg-light rounded sortData">
+                  <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                      <a [ngClass]="{'nav-item nav-link active' : addClassTo=='monthly', 'nav nav-tabs nav-item nav-link' : defaultClass=='' }"
+                        id="nav-monthly-tab" (click)="getTabName('monthly')" data-toggle="tab" role="tab"
+                        aria-controls="nav-monthly">Monthly</a>
+
+                      <a [ngClass]="{'nav-item nav-link active' : addClassTo=='daily', 'nav nav-tabs nav-item nav-link' : defaultClass=='' }"
+                        id="nav-daily-tab" (click)="getTabName('daily')" data-toggle="tab" role="tab"
+                        aria-controls="nav-daily">Daily</a>
+
+
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div
+                      [ngClass]="{'nav-item nav-link active' : addClassTo=='daily' , 'tab-pane fade': addClassTo!='daily' }"
+                      id="nav-daily" role="tabpanel" aria-labelledby="nav-daily-tab">
+
+                      <p-chart type="doughnut" width="388px" margin-left="86px" height="300px" [data]="dailyData">
+                      </p-chart>
+                    </div>
+
+                    <div
+                      [ngClass]="{'nav-item nav-link active' : addClassTo=='monthly' , 'tab-pane fade': addClassTo!='monthly' }"
+                      id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+                      <p-chart type="bar" [data]="monthlyData">
+                      </p-chart>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div *ngIf="registeredFlag" style="background-color: aliceblue;">
+                  <div class="col-md-8 ">
+                    <h5 class="m-3"> Registered Physicians</h5>
+                  </div>
+                  <div class="card shadow mb-4">
+                    <p-table [value]="registeredUsers" [scrollable]="true" scrollHeight="300px"
+                      *ngIf="registeredUsers.length>0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="font-weight: 600;" pSortableColumn="firstname">Fisrt Name <p-sortIcon
+                              field="username"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="lastname">Last Name <p-sortIcon
+                              field="username"></p-sortIcon>
+                          </th>
+                          <th style="background-color: #bddee570; font-weight: 600; " pSortableColumn="role">Reg Date
+                            <p-sortIcon field="username"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;">Approve</th>
+
+
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-newUsers>
+                        <tr>
+                          <td style="font-weight: 500;font-weight: 500;">{{newUsers.firstname}}</td>
+                          <td style="font-weight: 500;font-weight: 500; padding-left: 70px;">{{newUsers.lastname}}</td>
+                          <td style="font-weight: 500;font-weight: 500; padding-left: 57px;">{{newUsers.regDate |
+                            date:'MMM d, y'}}</td>
+                          <td style="min-width:100px;margin-left: 66px;font-weight: 500;"><input
+                              (change)='setActiveUser(newUsers.username,$event)' type="checkbox"></td>
+
+                        </tr>
+
+                      </ng-template>
+
+                    </p-table>
+                    <div *ngIf="registeredUsers.length>0" class="col-md-8 text-center">
+                      <button type="button" class="btn btn-primary float-md-right" style="width: 150px;"
+                        (click)="updateActiveStatus()">Approve</button>
+                    </div>
+
+                    <p-table [scrollable]="true" scrollHeight="440px" *ngIf="registeredUsers.length==00">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <!-- <th align="center">No records found</th> -->
+                          <img src="assets\Images\no records.webp" height="440px" width="600px">
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </div>
+                <div class="container" *ngIf="!registeredFlag && approvedUsersFlag"
+                  style="background-color: aliceblue;">
+                  <div class="col-md-8">
+                    <h5 class="m-4"> Active Physicians</h5>
+                  </div>
+
+                  <div class="card myCard">
+                    <p-table [value]="approvedUsers" [scrollable]="true" scrollHeight="300px"
+                      *ngIf="approvedUsers.length>0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="font-weight: 600;" pSortableColumn="firstname">Fisrt Name <p-sortIcon
+                              field="firstname"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="lastname">Last Name <p-sortIcon
+                              field="lastname"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="role">Role <p-sortIcon field="role">
+                            </p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;">Action</th>
+
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-approvedUsers>
+                        <tr>
+                          <td style="min-width:100px;font-weight: 500;">{{approvedUsers.firstname}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{approvedUsers.lastname}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{approvedUsers.role}}</td>
+
+                          <!-- <td *ngIf="approvedUsers.isActive=='Y'" ><img src='assets/Images/Available.svg' class="status"></td>
+                              <td *ngIf="approvedUsers.isActive=='B'"><img src='assets/Images/ico-Available.svg' class="status"></td> -->
+                          <td style="min-width:100px" *ngIf="approvedUsers.isActive=='Y'"><button type="button"
+                              (click)='blockUser(approvedUsers.username)' class="btn btn-outline-danger">Block</button>
+                          </td>
+                          <td style="min-width:100px" *ngIf="approvedUsers.isActive=='B'"><button type="button"
+                              (click)='unblockUser(approvedUsers.username)'
+                              class="btn btn-outline-success">Unblock</button>
+
+                        </tr>
+                      </ng-template>
+
+
+                    </p-table>
+                    <p-table [scrollable]="true" scrollHeight="440px" *ngIf="approvedUsers.length==0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <img src="assets\Images\no records.webp" height="440px" width="600px">
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+
+                </div>
+                <div *ngIf='registeredPatientFlag' style="background-color: aliceblue;">
+                  <div class="col-md-8 ">
+                    <h5 class="m-4"> Active Patients</h5>
+                  </div>
+                  <div class="card shadow mb-4">
+                    <p-table [value]="registeredPatients" [scrollable]="true" scrollHeight="350px"
+                      *ngIf="registeredPatients.length>0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="font-weight: 600;" pSortableColumn="firstname">Fisrt Name <p-sortIcon
+                              field="firstname"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="lastname">Last Name <p-sortIcon
+                              field="lastname"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;">Contact Details</th>
+
+
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-newPatients>
+                        <tr>
+                          <td style="min-width:100px;font-weight: 500;">{{newPatients.firstname}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{newPatients.lastname}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{newPatients.phone}}</td>
+
+                        </tr>
+
+                      </ng-template>
+
+                    </p-table>
+
+                    <p-table [scrollable]="true" scrollHeight="440px" *ngIf="registeredPatients.length==00">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <img src="assets\Images\no records.webp" height="440px" width="600px">
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </div>
+                <!-- start -->
+
+                <div *ngIf='appointmentsFlag'>
+
+                  <div *ngIf="appointmentData.length>0" class="row" style="background-color: aliceblue;">
+                    <div class="col-md-8">
+                      <h5 class="m-4"> Today's Appointments</h5>
+                    </div>
+                    <div class="m-4" (click)='printPage()'>
+                      <i class="fa fa-print" aria-hidden="true"></i>
+                    </div>
+                    <!-- <div class="m-4">
+                      <i class="fa fa-download"></i>
+                    </div> -->
+                    <div class="m-4" (click)='displayGraphicalView()'>
+                      <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    </div>
+
+
+                  </div>
+
+
+                  <div class="card shadow mb-4">
+                    <p-table id='tb' [value]="appointmentData" [scrollable]="true" scrollHeight="370px"
+                      *ngIf="appointmentData.length>0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="font-weight: 600;" pSortableColumn="username">Patient Name <p-sortIcon
+                              field="username"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="doc_name">Appointment With <p-sortIcon
+                              field="doc_name"></p-sortIcon>
+                          </th>
+                          <th style="font-weight: 600;" pSortableColumn="schedule_time">Appointment Date <p-sortIcon
+                              field="schedule_time"></p-sortIcon>
+                          </th>
+
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-app>
+                        <tr>
+                          <td style="min-width:100px;font-weight: 500;">{{app.username}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{app.doc_name}}</td>
+                          <td style="min-width:100px;font-weight: 500;">{{app.schedule_time | date:'MMM d, y, h:mm a' }}
+                          </td>
+
+                        </tr>
+
+                      </ng-template>
+
+                    </p-table>
+
+                    <p-table [scrollable]="true" scrollHeight="440px" *ngIf="appointmentData.length==0">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <img src="assets\Images\no records.webp" height="440px" width="600px">
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <p-chart type="line" height="220" [data]="RegPhysician" [options]="basicOptions"></p-chart>
+              </div>
+
+              <div class="card shadow mb-4">
+                <p-chart type="line" height="220" [data]="RegPatients" [options]="basicOptions"></p-chart>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <ul class="hash-list cols-5 cols-5-xs pad-30-all align-center text-sm">
+                  <div class="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg card-header text-uppercase"
+                    contenteditable="false"
+                    style="background: linear-gradient(105.88deg, #b9beef -16.37%, #53b2c7 93.46%);">Top Appointed
+                    Physicians</div>
+                  <li *ngFor="let data of topRatedDoctor">
+                    <img src="{{data.profile_pic}}" class="wpx-100 img-round mgb-20 hoverCls">
+                    <p class="fs-110 font-cond-l" contenteditable="false">{{data.type}}</p>
+                    <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">{{data.username}}</h5>
+                    <small class="font-cond case-u lts-sm fs-80 fg-text-l"
+                      contenteditable="false">{{data.location}}</small>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header text-center text text-uppercase"
+                  style="font-weight: bold;background: linear-gradient(105.88deg, #b9beef -16.37%, #53b2c7 93.46%);">
+                  Total Visited Users </div>
+                <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span> </span>
+                  <span class="progress-right"> <span class="progress-bar"></span> </span>
+                  <div class="progress-value">{{totalVisited}} Users</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </body>
+    </ng-container>
+
+    <ng-container *ngIf="patientData.role=='Patient'">
+      <div class="container">
+
+        <div class="ttm-page-title-row">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="title-box ttm-textcolor-white">
+                  <div class="page-title-heading">
+                    <h4>Welcome {{patientData.firstname | titlecase}} {{patientData.lastname | titlecase}}</h4>
+                    <!-- <span class="large text-muted">Welcome</span>
+                            <span class="large">{{userDetail.username}}</span> -->
+                  </div>
+                  <!-- /.page-title-captions -->
+                  <hr>
+                  <div class="breadcrumb-wrapper">
+                    <div class="container">
+                      <div class="breadcrumb-wrapper-inner">
+
+
+                        <span class="small text-muted">To keep the body in good health is a duty...otherwise</span>
+                        <span class="small text-muted">We shall not keep our mind strong and clear</span>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+
+          </div><!-- /.container -->
+        </div>
+        <br /><br />
+        <div class="row">
+          <div class="col-md-4">
+            <div [routerLink]="['/demographics']" class="card card-counter info-p"
+              style="border-radius:52px; background-color:white;">
+              <div class="mine">
+                <i class="fa fa-plus"></i>
+                <div class="main2" style="text-align: center;">
+                  <div class='icone_p'> <i style='font-size:3em' class="fa fa-id-card fa-fw text-primary"></i></div>
+                  <div class="count-name-p" style=" color:Black;">Add demographics</div>
+                </div>
+              </div>
+              <!-- <div class="overlay">
+                <div class="text">Hello World</div>
+            </div> -->
+
+            </div>
+          </div>
+          <div class=" col-md-4">
+            <div class="card card-counter info-p" [routerLink]="['/medications']"
+              style="border-radius:52px; background-color:white;">
+              <div class="mine">
+                <i class="fa fa-plus"></i>
+                <div class="main2" style="text-align: center;">
+                  <div class='icone_p'> <i style='font-size:3em' class="fa fa-medkit fa-fw text-primary"></i></div>
+                  <div class="count-name-p" style=" color:Black;">Add Medication/Allergies</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" col-md-4">
+            <div [routerLink]="['/immunization']" class="card card-counter info-p"
+              style="border-radius:52px; background-color:white;">
+              <div class="mine">
+                <i class="fa fa-plus"></i>
+                <div class="main2" style="text-align: center;">
+                  <div class='icone_p'><i style='font-size:3em'
+                      class="fa fa-heartbeat text-primary fa-fw text-primary"></i></div>
+                  <div><span class="count-name-p" style=" color:Black;">Add immunization Details</span></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-8">
+              <div class="row">
+                   <div class="col-sm-12 col-md-4">
+                    <div class="image_patient card-counter info">
+                      <span><i class="fas fa-address-book"></i></span>
+                      <span class="">Add Demographics</span>   
+                      <i class="fa fa-plus"></i>                 
+                    </div>
+                  </div>
+                   <div class="image_patient card-counter info">
+                      <span><i class="fas fa-address-book"></i></span>
+                      <span class="">Add Demographics</span>   
+                      <i class="fa fa-plus"></i>                 
+                    </div> 
+                 
+                  <div class=" col-sm-12 col-md-4">
+                    <div class="image_patient card-counter info">
+                      <span><i class="fas fa-address-book"></i></span>
+                      <span class="">Add Demographics</span>   
+                      <i class="fa fa-plus"></i>                 
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4">
+                    <div class="image_patient card-counter info">
+                      <span class="">New User Requests</span>
+  
+                      <i class="fa fa-users"></i>  
+                      <i class="fa fa-plus"></i>                 
+  
+                    </div>
+                  </div>
+              </div>
+          </div> -->
+        <br>
+        <div class="row ">
+          <div class="col-md-6 col-lg-8 stretch-card">
+            <div class="card card-rounded" style=" height: 250px; box-shadow: 0 0 25px 1px rgba(0, 0, 0, .3);">
+              <div class="card-header" style="background:linear-gradient(105.88deg, #b9beef -16.37%, #53b2c7 93.46%);">
+                <h5 class="card-title mb-0  ">Your Appoinments</h5>
+              </div>
+              <div class="card-body" style="overflow-y: auto !important;">
+                <div class="row ">
+
+                  <div class="col-sm-12">
+                    <div>
+                      <div class="row row-striped" *ngFor="let temp of patientData.sceduledAppointments">
+                        <div class="col-2 text-right d-sm-none d-none d-md-block d-lg-block d-lg-block">
+                          <h1 class="display-4"><span
+                              class="badge badge-secondary">{{temp.dateAndTime|date:'dd'}}</span></h1>
+                          <h2>{{temp.dateAndTime|date:'MMM'}}</h2>
+                        </div>
+                        <div class="col-10">
+                          <h3 style='font-size:19px' class="text-uppercase"><strong>Appointment with
+                              {{temp.physicianName}}</strong></h3>
+                          <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                              {{temp.dateAndTime|date:'EEEE'}}</li>
+                            <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                              {{temp.dateAndTime|date:'mediumTime'}}</li>
+                            <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Virtual
+                            </li>
+                          </ul>
+                          <p>You have appointment scheduled for "{{temp.type}}"</p>
+                        </div>
+                      </div>
+                      <span style='font-style:italic' *ngIf="patientData.sceduledAppointments.length==0">You have no
+                        Appointments!</span>
+                      <p-table [scrollable]="true" scrollHeight="" *ngIf="patientData.sceduledAppointments.length==0">
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <img src="assets\Images\no records.webp" height="440px" width="600px">
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </div>
+                  </div>
+                </div><br /><br />
+
+              </div>
+              <div [routerLink]="['/sceduleappointments']"
+                style=" background:white;text-align: center;position: relative;;"><a
+                  class="mt-auto btn btn-primary  ">Schedule Appoinment</a></div>
+
+            </div>
+
+
+
+
+          </div>
+          <div class="col-md-6 col-lg-4 stretch-card grid-margin">
+            <div class="card card-rounded"
+              style="padding:0; padding-right:2px;height: 250px;   box-shadow: 0 0 25px 1px rgba(0, 0, 0, .3);">
+              <div class="card-header" style="background:linear-gradient(105.88deg, #b9beef -16.37%, #53b2c7 93.46%);">
+                <h5 class="card-title mb-0">Latest News</h5>
+              </div>
+              <!-- <div class="card-body pb-0"> -->
+              <article class="col-md-12 col-sm-12" style="padding:0;padding-right: 32px;">
+                <ul>
+                  <li class="reports-l"><span style='color:#ff000094;'> <a href="https://www.medicalnewstoday.com/"
+                        target="_blank">Recommended foods for optimal health</a></span><br><i class="fa fa-calendar"
+                      aria-hidden="true"></i><span class="small text-muted "> Posted December 01, 2021</span>
+                  </li>
+                  <hr>
+                  <li class="reports-l"><span style='color:#ff000094;'> <a
+                        href="https://health.economictimes.indiatimes.com/latest-news" target="_blank">Latest updates on
+                        Covid-19 </a> </span><br><i class="fa fa-calendar" aria-hidden="true"></i><span
+                      class="small text-muted "> Posted December 07, 2021</span>
+                  </li>
+                </ul>
+              </article>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="section-title with-desc clearfix">
+          <div class="title-header">
+            <h6 text-muted>MEET OUR EXPERIENCED TEAM</h6>
+            <h3 class="title">Our Dedicated Doctors Team</h3>
+          </div>
+          <div class="title-desc text-muted">We offer extensive medical procedures to outbound and inbound patients what
+            it is and we are very proud of achievement of our staff, We are all work together to help our all patients
+            for recovery</div>
+
+        </div>
+        <hr><br />
+        <div class="row">
+          <div class="col col-sm-3 col-lg-3" *ngFor='let data of Doctors_temp'>
+            <div class="card" style="height: 270px;">
+              <div class="card-body">
+                <div class="card_img" style="display: flex; justify-content: center;">
+                  <img src={{data.profile_pic}} alt="user-image" style="width:60%; text-align:center">
+                </div>
+                <div class='card-title' style='text-align:center;font-weight: 500;'>{{data.username}}</div>
+                <p class="card-text" style='text-align:center;'>{{data.desc}}</p>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <hr>
+  
+
+      </div>
+
+
+      <!-- <div class="col-md-4">
+      <div class="text-center bg-primary m-5"><h1 class="text-white py-3">My Appointments</h1></div>
+      
+        <div class="mx-5">
+          <div class="container">
+              <full-calendar [options]="calendarOptions"></full-calendar>
+          </div>
+        </div> 
+        </div> -->
+
+
+    </ng-container>
+
+    <ng-container *ngIf="patientData.role=='Physician'">
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card border-light mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="{{physicianInfo.profile_pic}}" width="80px" height="100px" class="rounded-circle" alt="">
+                  </div>
+                  <div class="col-md-8">
+                    <h5>{{physicianInfo.name}}</h5>
+                    <p>{{physicianInfo.desc}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-light mb-3">
+              <div class="card-body">
+                <h6>CURRENT WORKPLACE</h6>
+                <p>CitiusTech Family clinic and Surgery</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-light mb-3">
+              <div class="card-body">
+                <h6>LOCATION</h6>
+                <p>{{physicianInfo.location}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <h3>All Appointments</h3>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="container">
+            <full-calendar [options]="calendarOptions" id="calendar"></full-calendar>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <section id="counter_var" class="sec-padding">
+      <div class="container">
+
+        <div class="row">
+          <div class="four col-md-3">
+            <div class="counter-box" style="height: 242px !important ;"> <i class="fa fa-trophy"></i> <span class="counter">{{projectcount}}</span>
+              <p>Award Win</p>
+            </div>
+          </div>
+          <div class="four col-md-3">
+            <div class="counter-box"> <i class="fa fa-group"></i> <span class="counter">{{accuratecount}}</span>
+              <p>Qualified Staff</p>
+            </div>
+          </div>
+          <div class="four col-md-3">
+            <div class="counter-box"> <i class="fa fa-thumbs-o-up"></i><span class="counter">{{clientcount}}</span>
+              <p>Happy Patients</p>
+            </div>
+          </div>
+          <div class="four col-md-3">
+            <div class="counter-box"> <i class="fa fa-medkit"></i><span class="counter">{{customerfeedback}}</span>
+              <p>Hospital Rooms</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<br>
+<br>
+<br>

@@ -1,0 +1,41 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9 " style="padding-top: 100px;">
+
+<section class="container mb-5">
+  <p class="head gradient-custom-2 text-white">Appointments History</p>
+      <div class="row">
+        <article class="card fl-left mr-2" *ngFor= "let a of appointments" style="border: 1px solid #0275d8;">
+          <section class="date">
+            <time datetime="{{a.dateAndTime | date:'MMM d'}}">
+              <span>{{a.dateAndTime | date:'d'}}</span><span>{{a.dateAndTime | date:'MMM'}}</span>
+            </time>
+          </section>
+          <section class="card-cont">
+            <small>{{a.physicianName}}</small>
+            <h3>{{a.type}}</h3>
+            <div class="even-date">
+             <i class="fa fa-calendar"></i>
+             <time>
+               <span>{{a.dateAndTime | date:'fullDate'}}</span>
+               <span>{{a.dateAndTime | date:'shortTime'}}</span>
+             </time>
+            </div>
+            <div class="even-info">
+              <i class="fa fa-map-marker"></i>
+              <p>
+                Citius Family Clinic, NY.
+              </p>
+            </div>
+            <!-- <button type="button" class="btn btn-primary p-2 mt-2" (click)="getOrders(a.dateAndTime)">View Vitals and Orders</button> -->
+          </section>
+        </article>
+        <ng-container *ngIf="appointments.length==0">
+          <img src="assets\Images\no records.webp" class="card-lg img-fluid border" height="440px" width="600px">
+
+        </ng-container>
+      </div>
+    </section>

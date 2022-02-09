@@ -1,0 +1,334 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9 " style="padding-top: 100px;">
+    <p-toast position="bottom-center"></p-toast>
+<div class="container">
+    
+    <!-- <section class="page-title bg-1" style="background-color:#25588f;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="block text-center">
+                <h1 class="text-capitalize mb-3 text-lgr">Immunization Details</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <div class="ttm-page-title-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7"> 
+                    <div class="title-box ttm-textcolor-white">
+                        <div class="page-title-heading">
+                          <h4>Immunization Details</h4>
+                          <!-- <span class="large text-muted">Welcome</span>
+                          <span class="large">{{userDetail.username}}</span> -->
+                          </div>
+                        <!-- /.page-title-captions -->
+                        <hr>
+                        <div class="breadcrumb-wrapper">
+                            <div class="container">
+                                <div class="breadcrumb-wrapper-inner">
+                              
+                                 
+                                    <span class="small text-muted">Vaccination saves lives at every stage of life</span>
+                                   
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.col-md-12 -->  
+            </div><!-- /.row -->  
+          
+        </div><!-- /.container -->                      
+      </div>
+      <br>
+      <form [formGroup]="immunizationform" >
+        <div class="form-group row">
+          <label style="font-weight: bold;"  class="col-sm-3 col-form-label">Vaccination Name</label>
+          <input type="text" list="currentMeds" formControlName="vaccine" class="form-control col-sm-9" (change)="setValues()">
+          <datalist id="currentMeds" >
+            <option *ngFor="let p of vaccinename" value="{{p}}" >{{p}}</option>
+          </datalist>
+        </div>
+        <div class="form-group row">
+          <label style="font-weight: bold;"  class="col-sm-3 col-form-label"><span >Number of Dozes:</span></label>
+          <div style="display: flex; flex-direction: column;">
+            <input type="text" id="inputtext"  formControlName="noofdozes" [readOnly]="disableFields" [disabled]="disableFields"> 
+          </div>
+        </div>
+        <div class="form-group row">
+          <label style="font-weight: bold;" class="col-sm-3 col-form-label"><span >Vaccinated Date</span></label>
+          <div style="display: flex; flex-direction: column;">
+            <input formControlName="vaccinateddate" type="date" [readOnly]="disableFields" [disabled]="disableFields">
+          </div>
+        </div>
+        <div style="text-align:center" >
+          <button style='width:150px' type="button" class="btn btn-primary" (click)="addData()">Add Details</button></div>
+       
+      </form>
+
+
+
+
+      <section class="conatiner my-5">
+        <h2>Immunization List:</h2>
+        <table class="table table-striped  table-responsive-sm  my-5">
+            <thead class="gradient-custom-2 text-white">
+              <tr>
+                <th>Sr.No.</th>
+                <th>Vaccination Name</th>
+                <th>Vaccinated Date</th>
+                <th>Dozes</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let m of immunization; let i = index">
+                <th>{{i + 1}}</th>
+                <td>{{m.vaccine}}</td>
+                <td *ngIf='m.vaccinateddate'>{{m.vaccinateddate}}</td>
+                <td *ngIf='!m.vaccinateddate'>NA</td>
+                <td>{{m.noofdozes}}</td>
+                <td><button type="button" class="btn btn-danger" (click)="deleteMedicatios(m)">Delete</button></td>
+
+              </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <div style="text-align:center" >
+        <input style='width:150px' class="btn btn-primary" (click)='submit_med()' value="submit"></div>
+      </div>
+     </div>
+      
+     <!-- <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  data-toggle="collapse" href="#form-container" aria-expanded="false" aria-controls="collapseExample">
+        <label class="form-check-label" for="flexCheckDefault">
+            Have you been covid vaccinated
+        </label>
+      </div> 
+     
+     <form class="container collapse" id= "form-container" [formGroup]="covid" >
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <fieldset >
+            <div class='main' style="display: flex;flex-direction: row; justify-content: space-evenly;">
+                
+                    <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Vaccination Name</span>
+                        <input type="text" id="inputtext"  formControlName="vaccine"> 
+                      </div>
+                   <select class="form-control"  formControlName="vaccine" style=' box-shadow: 0px 1px 3px black;'>
+                      <option selected>Open this select menu</option>
+                      <option value="Covid">Covid</option>
+                      <option value="Hepatitis">Hepatitis</option>
+                      <option value="Influenza">Three</option>
+                      <option value="HIB">HIB</option>
+
+                      <option value="Rotavirus">Rotavirus</option>
+
+                    </select> 
+                  <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Number of Dozes</span>
+                    <input type="text" id="inputtext"  formControlName="noofdozes"> 
+                  </div>
+                  <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Date of Vaccinated</span>
+                    <input formControlName="vaccinateddate" type="date">
+                  </div>
+               <div style="width: 100px;">
+              
+            </div>
+                 
+            </div>
+            </fieldset>
+           
+           
+            </div>
+        </div>
+        </form>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  data-toggle="collapse" href="#form-container2" aria-expanded="false" aria-controls="collapseExample">
+            <label class="form-check-label" for="flexCheckDefault">
+                Have you been covid vaccinated
+            </label>
+          </div> 
+        <form class="container collapse" id= "form-container2" [formGroup]="Hepatitis" >
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <fieldset >
+                <div class='main' style="display: flex;flex-direction: row; justify-content: space-evenly;">
+                    <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                        <select class="form-control"  formControlName="vaccine" style=' box-shadow: 0px 1px 3px black;'>
+                          <option selected>Open this select menu</option>
+                          <option value="1">Covid</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                      <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                        <input type="text" id="inputtext"  formControlName="noofdozes"> 
+                      </div>
+                      <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                        <input formControlName="vaccinateddate" type="date">
+                      </div>
+                   <div style="width: 100px;">
+                  
+                </div>
+                     
+                </div>
+                </fieldset>
+               
+               
+                </div>
+            </div>
+            </form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  data-toggle="collapse" href="#form-container3" aria-expanded="false" aria-controls="collapseExample">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Have you been Influenza  vaccinated
+                </label>
+              </div> 
+            <form class="container collapse" id= "form-container3" [formGroup]="Influenza" >
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <fieldset >
+                    <div class='main' style="display: flex;flex-direction: row; justify-content: space-evenly;">
+                        <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                            <select class="form-control"  formControlName="vaccine" style=' box-shadow: 0px 1px 3px black;'>
+                              <option selected>Open this select menu</option>
+                              <option value="1">Covid</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </select>
+                          </div>
+                          <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                            <input type="text" id="inputtext"  formControlName="noofdozes"> 
+                          </div>
+                          <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                            <input formControlName="vaccinateddate" type="date">
+                          </div>
+                       <div style="width: 100px;">
+                      
+                    </div>
+                         
+                    </div>
+                    </fieldset>
+                   
+                   
+                    </div>
+                </div>
+                </form>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  data-toggle="collapse" href="#form-container4" aria-expanded="false" aria-controls="collapseExample">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Have you been HIB vaccinated
+                    </label>
+                  </div> 
+                <form class="container collapse" id= "form-container4"  [formGroup]="HIB" >
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <fieldset >
+                        <div class='main' style="display: flex;flex-direction: row; justify-content: space-evenly;">
+                            <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                <select class="form-control"  formControlName="vaccine" style=' box-shadow: 0px 1px 3px black;'>
+                                  <option selected>Open this select menu</option>
+                                  <option value="1">Covid</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                              </div>
+                              <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                <input type="text" id="inputtext"  formControlName="noofdozes"> 
+                              </div>
+                              <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                <input formControlName="vaccinateddate" type="date">
+                              </div>
+                           <div style="width: 100px;">
+                            
+                        </div>
+                             
+                        </div>
+                        </fieldset>
+                       
+                       
+                        </div>
+                    </div>
+                    </form>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  data-toggle="collapse" href="#form-container5" aria-expanded="false" aria-controls="collapseExample">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Have you been Rotavirus vaccinated
+                        </label>
+                      </div> 
+                    <form class="container collapse" id= "form-container5" [formGroup]="Rotavirus" >
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <fieldset >
+                            <div class='main' style="display: flex;flex-direction: row; justify-content: space-evenly;">
+                                <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                    <select class="form-control"  formControlName="vaccine" style=' box-shadow: 0px 1px 3px black;'>
+                                      <option selected>Open this select menu</option>
+                                      <option value="1">Covid</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                  </div>
+                                  <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                    <input type="text" id="inputtext"  formControlName="noofdozes"> 
+                                  </div>
+                                  <div style="display: flex; flex-direction: column;"><span style='margin-right:10px;margin-bottom:10px;background:#dee2e6;'>Select the vaccine</span>
+                                    <input formControlName="vaccinateddate" type="date">
+                                  </div>
+                               <div style="width: 100px;">
+                              
+                            </div>
+                                 
+                            </div>
+                            </fieldset>
+                           
+                           
+                            </div>
+                        </div>
+                        
+                        </form>
+                        <button class="btn btn-primary" type="button" (click)="addDetail()">submit</button>
+     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Link with href
+      </a>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="well">
+          ...
+        </div>
+      </div>
+      <table *ngIf="showTable" class="table table-dark"  border="2" cellpadding="5" cellspacing="0">
+
+        <tr>
+          <th>Vaccination Name</th>
+       <th>vaccination ddate</th>
+          <th>Number of dozes</th>
+         
+      
+        </tr>
+      
+        <tr *ngFor="let user of vaccinedeatils">
+            <td>{{ user.vaccine }}</td>
+            <td>{{ user.vaccinateddate }}</td>
+            <td>{{ user.noofdozes }}</td>
+      
+           
+      
+          
+      
+      
+        </tr>
+      </table> -->
+
+

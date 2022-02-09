@@ -1,0 +1,77 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-6" style="padding-top: 100px;">
+    <p-toast position="top-center" [style]="{marginTop: '30px'}" ></p-toast>
+    <div class="container">
+      <form [formGroup]="ticketForm" (submit)="raiseTicket()">
+        
+        <div class="form-group">
+          <label class="form-label" for="username">Subject
+            <span style="color: red;">*</span>
+          </label>
+          <input type="text" class="form-control" name="title" id="title" formControlName="title"
+            placeholder="Subject" />
+
+          <div *ngIf="!ticketForm.controls.title?.valid && (ticketForm.controls.title?.dirty
+                    ||ticketForm.controls.title?.touched)" style="color: red;">
+            Subject is required
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="body">Description
+            <span style="color: red;">*</span>
+          </label>
+          <textarea rows="10" class="form-control" name="body" id="body" formControlName="body"
+            placeholder="Description">
+                    </textarea>
+          <div *ngIf="!ticketForm.controls.body?.valid && (ticketForm.controls.body?.dirty
+                    ||ticketForm.controls.body?.touched)" style="color: red;">
+            Description is required
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!ticketForm.valid" class="btn btn-primary">Submit</button>
+      </form>
+
+
+    </div>
+  </div>
+  <div class="col-md-3" style="padding-top: 100px;">
+    <div class="card"  style="height: 300px;">
+      <div class="card-header  gradient-custom-2 text-white" style="border: 1px solid black!important;">
+        <h5 class="card-title mb-0 " >Ticket Status</h5>
+      </div>
+      <div class="card-body"  style="border: 1px solid black!important;">
+        <div class="widget-summaryrequests-list widget-panel" tabindex="0" style="overflow: hidden; outline: none;">
+
+
+          <div><span>Pending Tickets</span></div>
+          <p>
+            <span class="widget-request-txt" title="My Tickets in pending status">{{pendingTickets}}</span>
+          </p>
+
+          <div><span>Approved Tickets</span></div>
+          <p>
+            <span class="widget-request-txt" title="My Tickets in Approved status">{{approvedTickets}}</span>
+          </p>
+
+          <div><span>Declined Tickets</span></div>
+          <p>
+            <span class="widget-request-txt" title="My Tickets in Declined status">{{declinedTickets}}</span>
+          </p>
+
+
+        </div>
+
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+
+</div>

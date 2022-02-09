@@ -1,0 +1,78 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+    <div class="col-md-3">
+        <app-admin-navigation></app-admin-navigation>
+    </div>
+
+
+    <div class="col-md-9" style="padding-top: 100px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget-box">
+                    <div class="widget-header bordered-bottom bordered-themesecondary">
+                        <i class="widget-icon fa fa-tags themesecondary"></i>
+                        <h5 class="widget-caption text-uppercase" style="font-weight: bold!important;font-size: large;">Ticket Board</h5>
+                    </div>
+
+
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <div class="tickets-container">
+                                <ul class="tickets-list">
+                                    <li class="ticket-item" *ngFor="let data of tickets">
+                                        <div class="row" style="border: 1px solid #5bc0de !important;">
+                                            <div class="ticket-user col-md-4 col-sm-12">
+                                                <img src="assets/Images/user.png" class="user-avatar">
+                                                <span style="font-size: large; font-weight: 500;" class="user-name">{{data.uname}}</span>
+
+                                            </div>
+                                            <div class="ticket-time  col-md-4 col-sm-6 col-xs-12">
+                                                <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                                <i class="fa fa-clock-o text-primary"></i>
+                                                <span style="font-size: large; font-weight: 500;"
+                                                    class="time">{{data.raisedDate|date:'medium'}}</span>
+                                            </div>
+                                            <div class="ticket-type  col-md-4 col-sm-12 col-xs-12">
+                                                <span class="divider hidden-xs"></span>
+                                                <span class="type" style="font-size:small; font-weight: 500!important;">{{data.title}}</span>
+                                                <br>
+                                                <span><a href="javascript:void(0)" (click)="showDetails(data)">View Details</a></span>
+                                            </div>
+
+                                            <div class="ticket-state bg-palegreen" *ngIf="data.status=='approve'">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                            <div class="ticket-state bg-red" *ngIf="data.status=='decline'">
+                                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="ticket-state bg-yellow" *ngIf="data.status==''">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div *ngIf='ticektData'>
+    <p-dialog  header="{{ticektData.title}}" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+        <p>{{ticektData.body}}</p>
+        <ng-template pTemplate="footer">
+            <button type="button" (click)="confirm1(ticektData,'approve')"
+                class="btn btn-outline-success">Approve</button>
+            <button type="button" (click)="confirm1(ticektData,'decline')"
+                class="btn btn-outline-danger">Decline</button>
+
+        </ng-template>
+    </p-dialog>
+</div>

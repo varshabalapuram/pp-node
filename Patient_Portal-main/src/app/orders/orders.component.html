@@ -1,0 +1,384 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9 " style="padding-top: 100px;">
+    <p class="head gradient-custom-2 text-white">Patient Vitals & Orders</p>
+
+    <!-- <section class="container my-5">
+        <h1>Appointments History</h1>
+          <div class="row">
+            <article class="card fl-left" *ngFor= "let a of appointments" style="border: 1px solid #0275d8;">
+              <section class="date">
+                <time datetime="{{a.dateAndTime | date:'MMM d'}}">
+                  <span>{{a.dateAndTime | date:'d'}}</span><span>{{a.dateAndTime | date:'MMM'}}</span>
+                </time>
+              </section>
+              <section class="card-cont">
+                <small>{{a.physicianName}}</small>
+                <h3>{{a.type}}</h3>
+                <div class="even-date">
+                 <i class="fa fa-calendar"></i>
+                 <time>
+                   <span>{{a.dateAndTime | date:'fullDate'}}</span>
+                   <span>{{a.dateAndTime | date:'shortTime'}}</span>
+                 </time>
+                </div>
+                <div class="even-info">
+                  <i class="fa fa-map-marker"></i>
+                  <p>
+                    Citius Family Clinic, NY.
+                  </p>
+                </div>
+                <button type="button" class="btn btn-primary p-2 mt-2">View Vitals and Orders</button>
+              </section>
+            </article>
+          </div>
+        </section> -->
+
+
+        <div class="accordion" id="accordionExample">
+          <div class="card" *ngFor="let item of allAppointmentsData;let i= index ">
+            <div class="card-header"  id="item_{{i}}">
+              <h2 class="mb-0">
+                <!-- <button class="btn btn-link btn-block text-left" type="button" data-toggle="#collapse" data-target="#collapse"  aria-expanded="true" aria-controls="collapse">
+                 <a href="#collapse{{i}}"    data-toggle="collapse" data-parent="#accordion" [href]="'#collapse'+i" aria-expanded="true" [attr.aria-controls]="'collapse'+i">Collapsible Group Item #{{i}}</a> 
+                </button> -->
+                  <a   class="btn btn-link btn-block text-left"  data-toggle="collapse" attr.data-target="#collapse_{{i}}" aria-expanded="true" attr.aria-controls="collapse_{{i}}">Orders by {{item.physicianName}} for {{item.type}}
+                    <span class="float-right" >{{item.schedule_time|date:"mediumDate"}}</span>
+                  </a> 
+                 
+              </h2>
+            </div>
+          
+            <div id="collapse_{{i}}" class="collapse"  attr.aria-labelledby="item_{{i}}" data-parent="#accordionExample">
+              <div class="card-body" >
+                <ul class="nav nav-tabs nav-fill mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pills-vitals-tab" data-toggle="pill" href="#pills-vitals{{i}}" role="tab" aria-controls="pills-vitals{{i}}" aria-selected="true">Vitals</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link " id="pills-procedure-tab" data-toggle="pill" href="#pills-procedure{{i}}" role="tab" aria-controls="pills-procedure{{i}}" aria-selected="false">Procedure</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link " id="pills-daignosis-tab" data-toggle="pill" href="#pills-daignosis{{i}}" role="tab" aria-controls="pills-daignosis{{i}}" aria-selected="false">Diagnosis</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-lab-tab" data-toggle="pill" href="#pills-lab{{i}}" role="tab" aria-controls="pills-lab{{i}}" aria-selected="false">Lab Reports</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="pills-radiology-tab" data-toggle="pill" href="#pills-radiology{{i}}" role="tab" aria-controls="pills-radiology{{i}}" aria-selected="false">Radiology Reports</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="pills-medications-tab" data-toggle="pill" href="#pills-medications{{i}}" role="tab" aria-controls="pills-medications{{i}}" aria-selected="false">Medications</a>
+                  </li>
+                    
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-vitals{{i}}" role="tabpanel" aria-labelledby="pills-vitals-tab">
+                    <div class="container table-responsive-sm">
+                        <table class="table table-striped table-bordered my-5">
+                           <thead class="gradient-custom-2 text-white">
+                              <tr>
+                                <th>Body Temprature</th>
+                                <th>Blood Pressure</th>
+                                <th>Pulse Rate</th>
+                                <th>Height</th>
+                                <th>Weight</th>
+                                <th>Date</th>
+                                <th>Referred By</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              
+                              <tr>
+                                <td>{{item.visitDetails?.vitalsDetails.bodyTemprature}}</td>
+                                <td>{{item.visitDetails?.vitalsDetails.bloodPressure}}</td>
+                                <td>{{item.visitDetails?.vitalsDetails.pulseRate}}</td>
+                                <td>{{item.visitDetails?.vitalsDetails.height}}</td>
+                                <td>{{item.visitDetails?.vitalsDetails.weight}}</td>
+                                <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                <td>{{item.physicianName}}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                  <div class="tab-pane fade " id="pills-procedure{{i}}" role="tabpanel" aria-labelledby="pills-procedure-tab">
+                      <div class="container table-responsive-sm">
+                          <table class="table table-striped table-bordered my-5">
+                             <thead class="gradient-custom-2 text-white">
+                                <tr>
+                                  <th>Sr.No.</th>
+                                  <th>Procedure Code & Description</th>
+                                  <th>Date</th>
+                                  <th>Referred By</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                                <tr *ngFor = "let al of item.visitDetails?.procedureDetails.procedureCode ; let in = index">
+                                  <td>{{in + 1}}</td>
+                                  <td>{{al.procedureCode}}</td>
+                                  <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                  <td>{{item.physicianName}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-daignosis{{i}}" role="tabpanel" aria-labelledby="pills-daignosis-tab">
+                      <div class="container table-responsive-sm">
+                          <table class="table table-striped table-bordered my-5">
+                             <thead class="gradient-custom-2 text-white">
+                                <tr>
+                                  <th>Sr.No.</th>
+                                  <th>Diagnosis Code & Description</th>
+                                  <th>Date</th>
+                                  <th>Referred By</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let al of item.visitDetails?.procedureDetails.diagnosisCode ; let in = index">
+                                  <td>{{in + 1}}</td>
+                                  <td>{{al.diagnosisCode}}</td>
+                                  <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                  <td>{{item.physicianName}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-lab{{i}}" role="tabpanel" aria-labelledby="pills-lab-tab">
+                      <div class="container table-responsive-sm">
+                          <table class="table table-striped table-bordered my-5">
+                             <thead class="gradient-custom-2 text-white">
+                                <tr>
+                                  <th>Sr.No.</th>
+                                  <th>Lab Reports</th>
+                                  <th>Date</th>
+                                  <th>Referred By</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let al of item.visitDetails?.ordersDetails.labReports ; let in = index">
+                                  <td>{{in + 1}}</td>
+                                  <td>{{al.labReports}}</td>
+                                  <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                  <td>{{item.physicianName}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-radiology{{i}}" role="tabpanel" aria-labelledby="pills-radiology-tab">
+                      <div class="container table-responsive-sm">
+                          <table class="table table-striped table-bordered my-5">
+                             <thead class="gradient-custom-2 text-white">
+                                <tr>
+                                  <th>Sr.No.</th>
+                                  <th>Radiology Reports</th>
+                                  <th>Date</th>
+                                  <th>Referred By</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let al of item.visitDetails?.ordersDetails.radiologyReports ; let in = index">
+                                  <td>{{in + 1}}</td>
+                                  <td>{{al.radiologyReports}}</td>
+                                  <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                  <td>{{item.physicianName}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                                  
+                  </div>
+                  <div class="tab-pane fade" id="pills-medications{{i}}" role="tabpanel" aria-labelledby="pills-medications-tab">
+                      <div class="container table-responsive-sm">
+                          <table class="table table-striped table-bordered my-5">
+                              <thead class="gradient-custom-2 text-white">
+                                <tr>
+                                  <th>Sr.No.</th>
+                                  <th>Medications</th>
+                                  <th>Date</th>
+                                  <th>Referred By</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let al of item.visitDetails?.ordersDetails.medications ; let in = index">
+                                  <td>{{in + 1}}</td>
+                                  <td>{{al.medications}}</td>
+                                  <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                                  <td>{{item.physicianName}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="allAppointmentsData.length==0">
+            <img src="assets\Images\no records.webp" class="card-lg img-fluid border" height="440px" width="600px">
+  
+          </ng-container>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link " id="pills-procedure-tab" data-toggle="pill" href="#pills-procedure" role="tab" aria-controls="pills-procedure" aria-selected="true">Procedure</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="pills-daignosis-tab" data-toggle="pill" href="#pills-daignosis" role="tab" aria-controls="pills-daignosis" aria-selected="false">Diagnosis</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-lab-tab" data-toggle="pill" href="#pills-lab" role="tab" aria-controls="pills-lab" aria-selected="false">Lab Reports</a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-radiology-tab" data-toggle="pill" href="#pills-radiology" role="tab" aria-controls="pills-radiology" aria-selected="false">Radiology Reports</a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-medications-tab" data-toggle="pill" href="#pills-medications" role="tab" aria-controls="pills-medications" aria-selected="false">Medications</a>
+          </li>
+            
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-procedure" role="tabpanel" aria-labelledby="pills-procedure-tab">
+              <div class="container">
+                  <table class="table table-striped table-bordered my-5">
+                     <thead class="gradient-custom-2 text-white">
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Procedure Code & Description</th>
+                          <th>Date</th>
+                          <th>Referred By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        <tr *ngFor = "let al of item.visitDetails.procedureDetails.procedureCode ; let in = index">
+                          <td>{{in + 1}}</td>
+                          <td>{{al.procedureCode}}</td>
+                          <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                          <td>{{item.physicianName}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-daignosis" role="tabpanel" aria-labelledby="pills-daignosis-tab">
+              <div class="container">
+                  <table class="table table-striped table-bordered my-5">
+                     <thead class="gradient-custom-2 text-white">
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Diagnosis Code & Description</th>
+                          <th>Date</th>
+                          <th>Referred By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let al of item.visitDetails.diagnosisCode ; let in = index">
+                          <td>{{in + 1}}</td>
+                          <td>{{al.diagnosisCode}}</td>
+                          <td>{{item.schedule_time|date:"mediumDate"}}</td>
+                          <td>{{item.physicianName}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-lab" role="tabpanel" aria-labelledby="pills-lab-tab">
+              <div class="container">
+                  <table class="table table-striped table-bordered my-5">
+                     <thead class="gradient-custom-2 text-white">
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Lab Reports</th>
+                          <th>Date</th>
+                          <th>Referred By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>1</td>
+                              <td>Thyroid panel</td>
+                              <td>13/12/2021</td>
+                              <td>Dr. Mathew Hood</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-radiology" role="tabpanel" aria-labelledby="pills-radiology-tab">
+              <div class="container">
+                  <table class="table table-striped table-bordered my-5">
+                     <thead class="gradient-custom-2 text-white">
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Radiology Reports</th>
+                          <th>Date</th>
+                          <th>Referred By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>1</td>
+                              <td>spine MRI</td>
+                              <td>13/12/2021</td>
+                              <td>Dr. Mathew Hood</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+                          
+          </div>
+          <div class="tab-pane fade" id="pills-medications" role="tabpanel" aria-labelledby="pills-medications-tab">
+              <div class="container">
+                  <table class="table table-striped table-bordered my-5">
+                     <thead class="gradient-custom-2 text-white">
+                        <tr>
+                          <th>Sr.No.</th>
+                          <th>Medications</th>
+                          <th>Date</th>
+                          <th>Referred By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>1</td>
+                              <td>LIQUAEMIN SODIUM10,000 UNITS/ML</td>
+                              <td>13/12/2021</td>
+                              <td>Dr. Mathew Hood</td>
+                            </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+        </div> -->
+
+
+
+
+
+
+

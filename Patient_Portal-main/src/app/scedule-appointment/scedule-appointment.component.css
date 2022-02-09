@@ -1,0 +1,244 @@
+
+.card-counter {
+    box-shadow: 2px 2px 10px #dadada;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: 0.3s linear all;
+  }
+  .c1
+  {
+    border: 1px solid gray;
+    border-radius : 10px;
+    width : 350px;
+    padding : 5px;
+    
+    margin: 5px;
+    box-shadow: 5px 5px 2px black;
+  }
+  .btn-group .btn.active {
+  box-shadow: none !important;
+  border-color: transparent;
+  background: #e12454;
+  color: #fff;
+  }
+  .doctor-filter{
+  display: block !important;
+  }
+  .card.w-50{
+    margin-bottom:10px;
+    background:aliceblue;
+  }
+  .booking{
+      margin-bottom:10px;
+  }
+  .card-counter:hover {
+    transform: scale(1.02, 1.02);
+    -webkit-transform: scale(1.02, 1.02);
+    backface-visibility: hidden; 
+    will-change: transform;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.75) !important;
+  }
+  
+  .card-counter.primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .card-counter.danger {
+    background-color: #ef5350;
+    color: #fff;
+  }
+  
+  .card-counter.success {
+    background-color: #66bb6a;
+    color: #fff;
+  }
+  
+  .card-counter.info {
+    background-color: #26c6da;
+    color: #fff;
+  }
+  
+  .card-counter i {
+    font-size: 5em;
+    opacity: 0.2;
+  }
+  
+  .card-counter .count-numbers {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+  }
+  .badge-secondary {
+    color: #fff;
+    
+  }
+  
+  .card-counter .count-name {
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+  }
+  .row {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  
+  
+  .rows {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 122px;
+    margin-left: -33px;
+    margin-top: 2px;
+    height: 59px !important;
+  }
+  .form-control {
+    width: 30%;
+  }
+  /* .count-name {
+    font-size: medium;
+    color: black;
+  } */
+  .ttm-btn{
+    -webkit-transition: all .5s ease-in-out 0s;
+  -moz-transition: all .5s ease-in-out 0s;
+  -ms-transition: all .5s ease-in-out 0s;
+  -o-transition: all .5s ease-in-out 0s;
+  transition: all .5s ease-in-out 0s
+  }
+  
+  
+  .ttm-team-member-single-content,
+  .ttm-team-member-single-list {
+  position: relative;
+  margin: 0
+  }
+  
+  .ttm-team-member-single-content-area .ttm-team-member-content{
+    margin-top: 36px;
+    margin-bottom: 36px;
+    margin-left: -30px;
+    padding: 46px 25px 40px 60px;
+  }
+  .ttm-team-member-content .ttm-team-member-single-title {
+  font-size: 25px;
+  line-height: 32px;
+  font-weight: 500;
+  margin-bottom: 0;
+  }
+  .ttm-team-member-single-position {
+    font-size: 15px;
+    color: #6e6e6e;
+    font-weight: 400;
+    margin-bottom: 10 px;
+  }
+  .img-fluid{
+  max-width: 100%;
+  height: auto;
+  width: 80%;
+  }
+  /* .card:hover{
+  transform:scale(1.2);
+  } */
+  .ttm-team-details-list li {
+  position: relative;
+  padding: 3px 0 6px 0;
+  font-size: 15px;
+  line-height: 24px;
+  display: block;
+  float: left;
+  width: 100%;
+  }
+  .btn-main {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  }
+  .btn:hover
+  {
+  background-color:#be1058;
+  border-color: #be1058;
+  
+  }
+  /* .btn-round-full {
+  border-radius: 50px;
+  } */
+  .ttm-team-details-list .ttm-team-list-title, .ttm-team-details-list .ttm-team-list-value {
+  display: inline-block;}
+  
+  .card{
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+  }
+  
+  .card:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+  
+  .btn-main{
+  background-color:#004381;
+  }
+  
+  
+  @media(max-width: 990px){
+  .card{
+    margin: 20px;
+  }
+  } 
+  
+  .bg-1 {
+  background-color: #004381;
+  background-size: cover;
+  position: relative;
+  }
+  
+  .page-title {
+  padding: 20px 0px 20px 0px;
+  }
+  
+  
+  .text-lgr {
+  font-size: 30px;
+  }
+  .page-title .block h1 {
+  color: #fff;
+  }
+  body {
+  font-family: Varela Round;
+  background: #f1f1f1;
+  }
+  
+  a {
+  text-decoration: none;
+  }
+  .doctors .btn-group {
+  display: block;
+  }
+  
+  @media (max-width: 768px){
+  .doctors .btn-group {
+  display: block;}
+  }
+  @media (max-width: 400px){
+  .doctors .btn-group {
+    display: block;
+  }}
+  
+  

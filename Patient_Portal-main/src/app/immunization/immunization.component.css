@@ -1,0 +1,66 @@
+@media(max-width: 990px){
+    .card{
+      margin: 20px;
+    }
+    
+    
+    .bg-1 {
+   background: linear-gradient(105.88deg, #b9beef -16.37%, #53b2c7 93.46%);
+    background-size: cover;
+    position: relative;
+    }
+    
+    .page-title {
+    padding: 20px 0px 20px 0px;
+    }
+    
+    
+    .text-lgr {
+    font-size: 30px;
+    }
+    .page-title .block h1 {
+    color: #fff;
+    }
+    body {
+    font-family: Varela Round;
+    background: #f1f1f1;
+    }
+    
+    a {
+    text-decoration: none;
+    }
+    .doctors .btn-group {
+    display: block;
+    }
+    .ttm-page-title-row {
+      display: block;
+      padding-top: 45px;
+      padding-bottom: 65px;
+      z-index: 11;
+    }
+    
+    .ttm-page-title-row {
+      
+      position: relative;
+      background-image: url(/assets/Images/immuni.PNG);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 30px;
+    }
+}
+.ttm-page-title-row {
+  display: block;
+  padding-top: 45px;
+  padding-bottom: 65px;
+  z-index: 11;
+}
+
+.ttm-page-title-row {
+  position: relative;
+  background-image: url(/assets/Images/immnuzation.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 30px;
+}

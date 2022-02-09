@@ -1,0 +1,61 @@
+<app-admin-header></app-admin-header>
+<div class="row">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9" style="padding-top: 100px">
+    <div class="container">
+      <!-- <div class="col-md-12 "> -->
+        <div class="col-md-12 border" style="box-shadow: 0 0 15px 1px rgb(0 0 0 / 40%);" >
+          <br>
+        <p-table  responsiveLayout="scroll"  *ngIf="appointmentData.length>0" [value]="appointmentData" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15,20]"
+          [totalRecords]="totalRecords" pageLinkSize="3"  [style]="{'color': 'blue'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="username">Patient Name <p-sortIcon field="username"></p-sortIcon></th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="doc_name">Appointment With <p-sortIcon field="doc_name"></p-sortIcon></th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="schedule_time">Appointment Time <p-sortIcon field="schedule_time"></p-sortIcon></th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="status">Visit Status <p-sortIcon field="status"></p-sortIcon></th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Action</th>
+              
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-app>
+            <tr>
+               
+            <td style="background-color: #bddee570; font-weight: 600;" class="p-4">{{app.username}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;">{{app.doc_name}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;">{{app.schedule_time | date:'MMM d, y, h:mm a'}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;" [ngStyle]="{'color':(app.status =='Ongoing') ? '#cf9f0e' : 'green' }" >{{app.status}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;" *ngIf="app.status=='Ongoing'"><a href="javascript:void(0)">Send Reminder</a></td>  
+            <td style="background-color: #bddee570; font-weight: 600;" *ngIf="app.status=='Completed'"><a href="javascript:void(0)">Billing Details </a></td>  
+              <!-- <td><button class="btn btn-default btn-xs"><span><i class="fa fa-eye" [routerLink]="['/patientOverview',app.doc_name,app.username,app.schedule_time]"></i></span></button></td> -->
+             </tr>
+             
+          </ng-template>
+        </p-table>  
+        
+        <p-table  responsiveLayout="scroll"  [scrollable]="true" scrollHeight="440px" *ngIf="appointmentData.length==0">
+          
+          <ng-template pTemplate="header">
+            <tr>
+             
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Patient Name</th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Appointment With</th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Appointment Time</th>
+              <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Visit Status</th>
+               <th class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Action</th>
+              
+
+            </tr>
+            <tr>
+              <img src="assets\Images\no records.webp" height="350px" width="600px">
+            </tr>
+          </ng-template>
+        </p-table>
+          </div>
+      </div>
+        
+  </div>
+</div>

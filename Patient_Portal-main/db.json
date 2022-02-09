@@ -1,0 +1,36 @@
+{
+    "users":[
+        {
+            "id":"1",
+            "firstName": "Amol",
+            "lastName":"Bundelkhandi",
+            "email": "amolbund@gmail.com",
+            "phone": "8788862226",
+            "age": "26"
+        },
+        {
+            "id":"2",
+            "firstName": "Varsha",
+            "lastName":"Balapuram",
+            "email": "varshab@gmail.com",
+            "phone": "9876543321",
+            "age": "25"
+        },
+        {
+            "id":"3",
+            "firstName": "Vishwanth",
+            "lastName":"Kota",
+            "email": "vishwanthk@gmail.com",
+            "phone": "7643652623",
+            "age": "27"
+        },
+        {
+            "id":"4",
+            "firstName": "Ashwini",
+            "lastName":"Jamunkar",
+            "email": "ashwinik@gmail.com",
+            "phone": "9876567890",
+            "age": "25"
+        }
+    ]
+}

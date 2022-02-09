@@ -1,0 +1,204 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9 " style="padding-top: 100px;">
+    <p-toast position="bottom-center"></p-toast>
+
+    <section class="page-title bg-1" style="background-color:#25588f;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="block text-center">
+              <h1 class="text-capitalize mb-3 text-lgr">Schedule Appointment</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="row" style="justify-content:center">
+      <div class="col-md-5 col-md-offset-5">
+        <div (click)="Display_cards('Physician')" class="card-counter primary physician-button">
+          <i class="fa fa-user-md"></i>
+          <span class="count-name">Physician</span>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-md-offset-5">
+        <div (click)="Display_cards('Specialist')" class="card-counter info specialist-button">
+          <i class="fa fa-users"></i>
+          <span class="count-name">Specialist</span>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div *ngIf='show_filter'><span style='margin-right:10px;background:#dee2e6;'>Filter By location:</span>
+      <select class="form-control" (change)="filter_by_location()" [(ngModel)]="location"
+        style=' box-shadow: 0px 1px 3px black;'>
+
+        <option *ngFor="let x of Locations">{{x}}</option>
+      </select>
+    </div>
+    <br>
+      <div *ngIf='show_dept_filter' class="col-12  mb-5"> <span style='margin-right:10px;background:#dee2e6;'>Filter By Department:</span><hr>
+        <div class="btn-group btn-group-toggle doctor-filter " (click)="onButtonGroupClick($event)" data-toggle="buttons">
+         
+          <label class="btn active">
+            <input type="radio" name="shuffle-filter" value="all" checked="checked">All Department
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Cardiologist ">Cardiologist 
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="General Physican">General Physican
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Neurologist">Neurologist
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Gynecologist">Gynecologist
+          </label>
+           <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Orthopedic">Orthopedic
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Dermitologits ">Dermitologits 
+          </label>
+          <label class="btn">
+            <input type="radio" name="shuffle-filter" value="Pediatrician ">Pediatrician 
+          </label>
+        </div><hr>
+    </div> 
+    <section *ngIf="sucess" class="section confirmation">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="confirmation-content text-center">
+              <i class="fa fa-check-circle" style="font-size:48px;color:red"></i>
+              <h2 class="mt-3 mb-4">Thank you for your appoinment</h2>
+              <p>We will contact with you soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+
+
+
+    <ng-container *ngIf='show_physician'>
+      <div class="cards-container">
+          <div *ngFor="let physician of Doctors_temp|filterDept : dept_selected">
+
+            <div class="card mb-3 hover-shadow" style="max-width: 600px;" *ngIf="physician.type==doctor_type">
+              <div style='margin-bottom: 10px;width: fit-content;' class="row no-gutters hover-zoom" >
+              <div class="col-md-4" style='align-self: center;'>
+                <img style='width:80%;' src={{physician.profile_pic}} class="card-img" alt="">
+              </div>
+                <div class="col-md-8" style="width: auto;">
+                  <div class="card-body" style="padding-left: 0%;">
+                  <h5 class="card-title">{{physician.username}}</h5>
+                  <p class="card-text">{{physician.desc}}</p>
+                  <div style='display: flex;'>
+                    <div style='color:red;'><i class="fa fa-map-marker" aria-hidden="true"></i>Location:</div>
+                    <div class="card-text" style='margin-left:10px'>{{physician.location}}</div>
+                  </div><br>
+                  <input class="btn btn-main btn-round-full " type="button" value="Scedule Appointment"
+                    (click)="schedule_appointment(physician)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="show_phy_confirmation">
+
+      <!-- <form [formGroup]="patientForm" (submit)="bookedAppoitment()"> -->
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-4">
+                  <img class="img-fluid" src={{selected_Doctor.profile_pic}} alt="image" height="100%" width="100%">
+                </div>
+                <div class="col-lg-8 pt-4 pt-lg-0 content">
+                  <h3>{{selected_Doctor.username}}</h3>
+                  <p class="fst-italic">
+                    {{selected_Doctor.desc}}
+                  </p>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <ul style="list-style: none">
+                        <li style="padding:3px 0 6px 0"><i class="fa fa-envelope"
+                            style="margin-right: 10px;"></i><strong>Email:</strong> <a href="mailto:info@example.com"
+                            tabindex="0"> info@example.com</a></li>
+                        <li style="padding:3px 0 6px 0"><i class="fa fa-phone"
+                            style="margin-right: 10px;"></i><strong>Phone:</strong> +123 456 7890</li>
+                        <li style="padding:3px 0 6px 0"><i class="fa fa-map-marker" style="margin-right: 10px;"></i>
+                          <strong>Address Info :</strong> City : New York, USA
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <p-calendar (onSelect)="onSelect($event)" [required]="true" [showTransitionOptions]="'4ms'"
+                      [hideTransitionOptions]="'0ms'" [minDate]="minDate" [maxDate]="maxDate" [(ngModule)]='date10'
+                      [readonlyInput]="true" [showTime]="true" placeholder="Schedule appointment" [showIcon]="true"
+                      inputId="icon"></p-calendar>
+
+                  </div>
+                  <br>
+
+                  <div class="form-group col-md-12 ">
+                    <label for="notes">Notes</label>
+                    <textarea class="form-control" id="notes" name="notes" [(ngModel)]="notes" style="width: 100%;"> </textarea>
+                    <!-- <div *ngIf="!patientForm.controls.notes?.valid && (patientForm.controls.notes?.dirty
+                     ||patientForm.controls.notes?.touched)" style="color: red;">
+                      Notes is required Minimum 10 characters
+                    </div> -->
+
+                  </div>
+                  
+                  <div class="form-group col-md-12 ">
+                    <label for="type">Type</label>
+                    <select class="form-control"  id="type" name="type" [(ngModel)]="type" aria-label="Default select example">
+                      <option selected>Select type</option>
+                      <option value="Routine Visit">Routine Visit</option>
+                      <option value="Root Canal">Root Canal</option>
+                      <option value="Diabetes">Diabetes</option>
+                      <option value="Viral">Viral</option>
+                      <option value="Fracture">Fracture</option>
+                    </select>
+              
+
+
+
+                  </div>
+                  <div *ngIf='showerror' class="text-danger">
+                    Please provide above Info.
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding-top:24px">
+                <h2>Overview</h2>
+                <p> {{selected_Doctor.overview}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;" class='book-appointment'><a type="submit" href="javascript:void(0)"
+          [disabled]="patientForm.invalid" (click)="bookedAppoitment()" class=" btn btn-primary btn-lg">Book
+          Appointment</a></div>
+
+      <!-- </form> -->
+
+ 
+    </ng-container> <br>
+    <br>
+    <br>
+  </div>

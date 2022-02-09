@@ -1,0 +1,42 @@
+{
+    "registrationDetails": [
+        {
+            "firstname": "vishwanth",
+            "lastname": "kota",
+            "email": "kota.vishwanth@example.com",
+            "role": "Patient",
+            "dob": "12/08/1947",
+            "username": "vishwanthk",
+            "phone": "206-555-1212"
+        },
+    {
+        "firstname" : "varsha",
+        "lastname" : "balapuram",
+        "email" : "balapuram.varsha@example.com",
+        "role" : "Patient",
+        "dob" : "12/08/1927",
+        "username" : "varshab",
+        "phone" : "206-555-1212"
+    },
+    {
+        "firstname" : "Amol",
+        "lastname" : "Bundelkhandi",
+        "email" : "Bundelkhandi.Amol@example.com",
+        "role" : "Patient",
+        "dob" : "12/08/1947",
+        "username" : "amolb",
+        "phone" : "206-555-1212"
+    }
+    ,
+    {
+        "firstname" : "ashwini",
+        "lastname" : "jamunkar",
+        "email" : "jamunkar.ashwini@example.com",
+        "role" : "Patient",
+        "dob" : "12/08/1917",
+        "username" : "ashwinij",
+        "phone" : "206-555-1212"
+    }
+
+]
+}

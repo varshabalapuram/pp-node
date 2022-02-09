@@ -1,0 +1,137 @@
+<app-admin-header></app-admin-header>
+<div class="row">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div *ngIf='Doctors_temp.length>0' class="col-md-9" style="padding-top: 100px">
+   <div class="row" style="display: inline;" >
+    <div class="col-md-12" style="display: inline-flex;">  
+        
+        <div class="col-md-4">
+        <select class="form-control" (change)="sortByLocation()" [(ngModel)]="location" style=' box-shadow: 0px 1px 3px black;'>
+          <option *ngFor="let x of Locations">{{x}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <select class="form-control"  [(ngModel)]="specialization" (change)="sortBySpecialization()" style=' box-shadow: 0px 1px 3px black;'>
+          <option *ngFor="let x of specializations">{{x}}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <select class="form-control"  [(ngModel)]="activeStatus" (change)="sortByActiveStatus()" style=' box-shadow: 0px 1px 3px black;'>
+          <option *ngFor="let x of status">{{x}}</option>
+        </select>
+      </div>
+    </div>
+    </div>
+    <br><br>
+    
+  <div class="container" style="margin-left: -13px;">
+    
+    <div class="col-xs-12 col-sm-6 col-md-4" style="float: left;"  *ngFor='let data of Doctors_temp'>
+                      <div class="image-flip" >
+                          <div class="mainflip flip-0">
+                              <div class="frontside">
+                                  <div class="card" style="background-color: #bddee570;">
+                                      <div class="card-body text-center">
+                                          <h4 class="card-title">{{data.username}}</h4>
+                                          <img src="{{data.profile_pic}}" alt="Avatar" class="avatar">
+                                          <p class="card-text">{{data.desc}}</p>
+                                          
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="backside">
+                                  <div class="card">
+                                      <div class="card-body text-center mt-4">
+                                        <p class="card-text">{{data.overview}}</p>
+                                        <p-button (click)="showBasicDialog(data)" icon="pi pi-external-link" label="Know more"></p-button>
+                                        
+                                        
+                                         
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                
+                 <div class="col-md-8">
+                   
+                 </div>
+
+  </div>
+
+    </div>
+    
+</div>
+
+
+<p-dialog header="Details" [(visible)]="displayBasic"  [style]="{width: '60vw',left: '157px'}" [baseZIndex]="10000">
+  
+ 
+  <ng-container>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-4">
+              <img class="img-fluid" src={{p_src}} alt="image" height="100%" width="100%">
+            </div>
+            <div class="col-lg-8 pt-4 pt-lg-0 content">
+              <h3>{{p_username}}</h3>
+              <p class="fst-italic">
+                {{p_disc}}
+              </p>
+              <div class="row">
+                <div class="col-lg-9">
+                  <ul style="list-style: none">
+                    <li style="padding:3px 0 6px 0"><i class="fa fa-envelope"
+                        style="margin-right: 10px;"></i><strong>Email:  </strong><a href="mailto:healthcare@citiustech.com"
+                        tabindex="0">{{p_email}}</a></li>
+                    <li style="padding:3px 0 6px 0"><i class="fa fa-phone"
+                        style="margin-right: 10px;"></i><strong>Phone:  </strong>{{p_phone}}</li>
+                    <li style="padding:3px 0 6px 0"><i class="fa fa-map-marker"
+                       style="margin-right: 10px;"></i>
+                      <strong>Address Info :  </strong> {{p_location}}</li>
+                    <li style="padding:3px 0 6px 0"><i class="fa fa-user-plus"
+                       style="margin-right: 10px;"></i>
+                      <strong>Registered on :  </strong> {{p_regOn | date:'MMM d, y'}}</li>
+                    <li style="padding:3px 0 6px 0"><i class="fa fa-eye"
+                       style="margin-right: 10px;"></i>
+                      <strong>Active Status :  </strong>  <i class="fa fa-toggle-on"  [style.color]="p_active=='Y' && !isBlocked ? 'green' : 'red'"></i></li>
+                      <li *ngIf="p_active=='B' || p_active=='Y'" style="padding:3px 0 6px 0"><i class="fa fa-cogs"
+                        style="margin-right: 10px;"></i>
+                       <strong>Action :  </strong>  
+                       <button type="button" *ngIf="p_active=='Y' && !isBlocked"  (click)='blockUser(p_username)'
+                        class="btn btn-outline-danger">Block</button>
+
+                       <button type="button" *ngIf="p_active=='Y' && isBlocked" (click)='unblockUser(p_username)' 
+                       class="btn btn-outline-success">Unblock</button>
+   
+                      </li>   
+                       
+                      
+
+                  </ul>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+          <div class="row" style="padding-top:24px">
+            <h2>Overview</h2>
+            <p> {{p_overview}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container> <br>
+  <ng-template pTemplate="footer">
+     
+      <p-button  (click)="displayBasic=false" label="Ok"></p-button>
+  </ng-template>
+</p-dialog>

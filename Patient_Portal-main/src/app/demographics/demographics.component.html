@@ -1,0 +1,162 @@
+<app-admin-header></app-admin-header>
+<div class="row" style="width: 100%;">
+    <div class="col-md-3">
+        <app-admin-navigation></app-admin-navigation>
+    </div>
+    <div class="col-md-9 " style="padding-top: 100px;">
+        <!-- <div style="text-align: center;" class="temp">
+        <h5  text-align= "center">Patient Demographics</h5> 
+      </div> -->
+        <section class="page-title bg-1" style="background-color:#25588f;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="block text-center">
+                            <h1 class="text-capitalize mb-3 text-lgr text-white font-weight-light">Patient Demographics
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <form class="container" [formGroup]="patientForm" (submit)="submit_click()">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="height">Height(cm)<span style="color: red;">*</span></label>
+                    <input class="form-control" id="height" formControlName="height">
+                   
+                    <div *ngIf="!patientForm.controls.height?.valid && (patientForm.controls.height?.dirty
+                      ||patientForm.controls.height?.touched)" style="color: red;">
+                        Height is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="weight">Weight(kg)<span style="color: red;">*</span></label>
+                    <input class="form-control" formControlName="weight" id="weight">
+                    <div *ngIf="!patientForm.controls.weight?.valid && (patientForm.controls.weight?.dirty
+                    ||patientForm.controls.weight?.touched)" style="color: red;">
+                     Weight is required
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="dob">Age<span style="color: red;">*</span></label>
+                    <input class="form-control" formControlName="age" id="age">
+                    <span style="color: red;" *ngIf="!patientForm.controls.age?.valid && (patientForm.controls.age?.dirty
+                    ||patientForm.controls.age?.touched)">
+                       Age is required
+                    </span>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="dob">Blood Pressure(mmHg)<span style="color: red;">*</span></label>
+                    <input class="form-control" formControlName="bloodPressure" id="bloodPressure">
+                    <span style="color: red;" *ngIf="!patientForm.controls.bloodPressure?.valid && (patientForm.controls.bloodPressure?.dirty
+                    ||patientForm.controls.bloodPressure?.touched)">
+                    Blood Pressure is required
+                    </span>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pluseRate">Pluse Rate(BPM)</label><span style="color: red;">*</span>
+                    <input class="form-control" formControlName="pluseRate" id="pluseRate">
+                    <span style="color: red;" *ngIf="!patientForm.controls.pluseRate?.valid && (patientForm.controls.pluseRate?.dirty
+                    ||patientForm.controls.pluseRate?.touched)">
+                    Pluse Rate is required
+                    </span>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="gender">Gender<span style="color: red;">*</span></label>
+                    <select id="gender" class="form-control" formControlName="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <div *ngIf="!patientForm.controls.gender?.valid && (patientForm.controls.gender?.dirty
+                       ||patientForm.controls.gender?.touched)" style="color: red;">
+                        Gender is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ethnicity">Ethnicity/Race</label>
+                    <input formControlName="ethnicity" class="form-control" id="ethnicity">
+                    <div *ngIf="!patientForm.controls.ethnicity?.valid && (patientForm.controls.ethnicity?.dirty
+                      ||patientForm.controls.ethnicity?.touched)" style="color: red;">
+                        Ethnicity/Race is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="education">Education:</label>
+                    <input formControlName="education" class="form-control" id="education">
+                    <div *ngIf="!patientForm.controls.education?.valid && (patientForm.controls.education?.dirty
+                      ||patientForm.controls.education?.touched)" style="color: red;">
+                        Education is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                    <label for="employment">Employment: </label>
+                    <input formControlName="employment" class="form-control" id="employment">
+                    <div *ngIf="!patientForm.controls.employment?.valid && (patientForm.controls.employment?.dirty
+                      ||patientForm.controls.employment?.touched)" style="color: red;">
+                        Employment is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <input formControlName="address" class="form-control" id="address">
+
+                    <div *ngIf="!patientForm.controls.address?.valid && (patientForm.controls.address?.dirty
+                  ||patientForm.controls.address?.touched)" style="color: red;">
+                        No. of characters should be more then 10
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phoneNo">Phone Number</label>
+                    <input formControlName="phoneNo" class="form-control" id="phoneNo">
+                    <div *ngIf="!patientForm.controls.phoneNo?.valid && (patientForm.controls.phoneNo?.dirty
+                  ||patientForm.controls.phoneNo?.touched)" style="color: red;">
+                        Phone Number is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                    <label for="provider">Insurence Provider</label>
+                    <input formControlName="provider" class="form-control" id="provider">
+                    <div *ngIf="!patientForm.controls.provider?.valid && (patientForm.controls.provider?.dirty
+                    ||patientForm.controls.provider?.touched)" style="color: red;">
+                        Insurence Provider is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                    <label for="medHistory">Medical History</label>
+                    <textarea formControlName="medHistory" class="form-control" id="medHistory">  </textarea>
+                    <div *ngIf="!patientForm.controls.medHistory?.valid && (patientForm.controls.medHistory?.dirty
+                 ||patientForm.controls.medHistory?.touched)" style="color: red;">
+                        Medical History is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                    <label for="familyMedHistory">Family Medical History</label>
+                    <textarea formControlName="familyMedHistory" class="form-control" id="familyMedHistory"> </textarea>
+                    <div *ngIf="!patientForm.controls.familyMedHistory?.valid && (patientForm.controls.familyMedHistory?.dirty
+                   ||patientForm.controls.familyMedHistory?.touched)" style="color: red;">
+                        Family Medical History is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="surgeries">Surgeries</label>
+                    <textarea formControlName="surgeries" class="form-control" id="surgeries">  </textarea>
+                    <div *ngIf="!patientForm.controls.surgeries?.valid && (patientForm.controls.surgeries?.dirty
+                  ||patientForm.controls.surgeries?.touched)" style="color: red;">
+                        Surgeries is required
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" [disabled]="patientForm.invalid" class="btn btn-primary">Submit</button>
+
+        </form>
+        <br>
+        <br>
+
+    </div>

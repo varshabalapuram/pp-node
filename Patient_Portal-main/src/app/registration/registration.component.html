@@ -1,0 +1,378 @@
+<section class="h-100" style="background-color: #eee;">
+    <p-toast position="bottom-center"></p-toast>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-4  align-items-center gradient-custom-2">
+
+                            <div class="text-center">
+                                <img src="assets/Images/registration.png"
+                                    style="margin-right: 20px; width: 30%; padding-top: 10px;">
+                                <h4 class="mt-1 mb-5 pb-1 text-white">Your few stepts away</h4>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card-body p-md-5 mx-md-4">
+
+                                <div class="text-center">
+                                    <img src="assets/Images/images.png" style="margin-right: 20px; width: 80%;">
+
+                                    <h4 class="mt-1 mb-5 pb-1 ">Citius Patient Portal </h4>
+                                </div>
+
+                                <form [formGroup]="registrationForm" (submit)="validDetails()">
+                                    <div class="row">
+                                        <div class="col col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label" for="username">First Name</label>
+                                                <input type="text" class="form-control" name="firstname" id="firstname"
+                                                    formControlName="firstname" placeholder="First Name" />
+
+                                                <div *ngIf="!registrationForm.controls.firstname?.valid && (registrationForm.controls.firstname?.dirty
+                                                            ||registrationForm.controls.firstname?.touched)"
+                                                    style="color: red;">
+                                                    First Name is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label" for="lastname">Last Name</label>
+                                                <input type="text" class="form-control" name="lastname" id="lastname"
+                                                    formControlName="lastname" placeholder="Last Name" />
+
+                                                <div *ngIf="!registrationForm.controls.lastname?.valid && (registrationForm.controls.lastname?.dirty
+                                                ||registrationForm.controls.lastname?.touched)" style="color: red;">
+                                                    Last Name is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="dob">Date Of Birth</label>
+                                        <input type="date" class="form-control" name="dob" id="dob"
+                                            formControlName="dob"  max="{{minAge | date:'yyyy-MM-dd'}}" placeholder="Date Of Birth" />
+                                        <div *ngIf="!registrationForm.controls.dob?.valid && (registrationForm.controls.dob?.dirty
+                                            ||registrationForm.controls.dob?.touched)" style="color: red;">
+                                            Date Of Birth is required
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="username">Username</label>
+                                        <input type="text" class="form-control" name="username" id="username"
+                                            formControlName="username" placeholder="User Name" />
+                                        <div *ngIf="!registrationForm.controls.username?.valid && (registrationForm.controls.username?.dirty
+                                            ||registrationForm.controls.username?.touched)" style="color: red;">
+                                            UserName is required
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="username">Role</label>
+                                        <select class="form-control" name="role" formControlName="role" id="role">
+                                            <option selected>Choose...</option>
+                                            <option value="Patient">Patient</option>
+                                            <option value="Physician">Physician</option>
+                                            <!-- <option value="Lab Assistant">Lab Assistant</option>
+                                            <option value="Admin">Admin</option> -->
+
+                                        </select>
+                                        <div *ngIf="!registrationForm.controls.role?.valid && (registrationForm.controls.role?.dirty
+                                        ||registrationForm.controls.role?.touched)" style="color: red;">
+                                            Please select the role
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            formControlName="email" placeholder="Please enter valid Email" />
+
+                                        <div *ngIf="!registrationForm.controls.email?.valid && (registrationForm.controls.email?.dirty || registrationForm.controls.email?.touched)"
+                                            style="color: red;">
+
+                                            Please Enter a valid email Id
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="mobile">Mobile Number</label>
+                                        <input type="text" class="form-control" name="phone" id="phone"
+                                            formControlName="phone" placeholder="Please enter Mobile Number" />
+                                        <div *ngIf="!registrationForm.controls.phone?.valid && (registrationForm.controls.phone?.dirty || registrationForm.controls.phone?.touched)"
+                                            style="color: red;">
+
+                                            Please Enter a valid Mobile Number
+
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="registrationForm.controls['role'].value=='Physician'">
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="type">Type</label>
+                                            <select class="form-control" name="type" formControlName="type" id="type">
+                                                <option selected>Choose...</option>
+                                                <option value="Specialist">Specialist</option>
+                                                <option value="Physician">Physician</option>
+                                                <!-- <option value="Lab Assistant">Lab Assistant</option>
+                                                <option value="Admin">Admin</option> -->
+    
+                                            </select>
+                                            <div *ngIf="!registrationForm.controls.type?.valid && (registrationForm.controls.type?.dirty
+                                            ||registrationForm.controls.type?.touched)" style="color: red;">
+                                                Please select the type
+                                            </div>
+                                        </div>
+
+
+                                        <label class="form-label" for="password">Description</label>
+
+                                        <div class="form-outline mb-4">
+                                            <textarea formControlName="desc" placeholder="Specialization | Expericence" style="width: 100%;">
+    
+                                            </textarea>
+    
+                                            <div *ngIf="!registrationForm.controls.desc?.valid && (registrationForm.controls.desc?.dirty || registrationForm.controls.desc?.touched)"
+                                                style="color: red;">
+    
+                                                Please Enter the Description
+    
+                                            </div>
+                                        </div>
+    
+    
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="location">Location</label>
+                                            <input type="text" class="form-control" name="location" id="location"
+                                                formControlName="location" placeholder="Location" />
+                                            <div *ngIf="!registrationForm.controls.location?.valid && (registrationForm.controls.location?.dirty
+                                                ||registrationForm.controls.location?.touched)" style="color: red;">
+                                                Location is required
+                                            </div>
+                                        </div>
+                                        <label class="form-label" for="overview">Overview</label>
+    
+                                        <div class="form-outline mb-4">
+                                            <textarea formControlName="overview" placeholder="overview" style="width: 100%;">
+                                            </textarea>
+                                            <div *ngIf="!registrationForm.controls.overview?.valid && (registrationForm.controls.overview?.dirty 
+                                            || registrationForm.controls.overview?.touched)" style="color: red;">
+                                                Please Enter the Overview
+                                            </div>
+                                        </div>
+    
+                                    </ng-container>
+
+                               
+
+
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" class="form-control" name="userpass" id="userpass"
+                                            formControlName="userpass" placeholder="Please Enter the Password" />
+                                        <div *ngIf="!registrationForm.controls.userpass?.valid && (registrationForm.controls.userpass?.dirty || registrationForm.controls.userpass?.touched)"
+                                            style="color: red;">
+
+                                            Please Enter the Password
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="password">Retype Password</label>
+                                        <input type="password" class="form-control" name="rePassword" id="rePassword"
+                                            [(ngModel)]="rePassword" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Renter the Password" />
+                                        <div class="text-center pt-5 mb-5 pb-1">
+                                            <button class=" btnRegister1   gradient-custom-2" type="submit"
+                                                [disabled]="registrationForm.invalid">Register</button>
+                                        </div>
+                                        <div class="text-center ">
+                                            <a class="" type="submit" [routerLink]="['/login']">Login?</a>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </form>
+                                <!-- <ng-container *ngIf="showError">
+                                    <p style="color: red;">{{errorMsg}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="sucessError">
+                                    <p style="color: green;">{{sucessMsg}}</p>
+                                </ng-container> -->
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- 
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+            <h3>Welcome</h3>
+            <p>You are 30 seconds away from earning your own money!</p>
+            <input type="submit" name="" value="Login" /><br />
+        </div>
+        <div class="col-md-9 register-right">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false">Hirer</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Apply as a Employee</h3>
+                    <div class="row register-form">
+
+                        <form>
+                            <p>Please login to your account</p>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="username">First Name</label>
+                                <input type="text" class="form-control" name="username" id="username"
+                                    [(ngModel)]="registration.firstname" placeholder="First Name" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="username">Last Name</label>
+                                <input type="text" class="form-control" name="username" id="username"
+                                    [(ngModel)]="registration.lastname" placeholder="Last Name" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="username">Date Of Birth</label>
+                                <input type="date" class="form-control" name="username" id="username"
+                                    [(ngModel)]="registration.lastname" placeholder="Date Of Birth" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="username"
+                                    [(ngModel)]="registration.username" placeholder="User Name" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="username">Role</label>
+                                <select class="form-select" id="inputGroupSelect01" name="username" id="username"
+                                    [(ngModel)]="registration.username">
+                                    <option selected>Choose...</option>
+                                    <option value="Patient">Patient</option>
+                                    <option value="Physician">Physician</option>
+                                    <option value="Lab Assistant">Lab Assistant</option>
+                                    <option value="Admin">Admin</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Email</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    [(ngModel)]="registration.email" placeholder="Valid Email" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Mobile Number</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    [(ngModel)]="registration.email" placeholder="Mobile Number" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    [(ngModel)]="registration.password" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Retype Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    [(ngModel)]="registration.password" />
+
+                                <div class="text-center pt-1 mb-5 pb-1">
+                                    <a class="text-muted" href="#!">Forgot password?</a>
+                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                                        (click)="validDetails(registration)">Log in</button>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center pb-4">
+                                    <p class="mb-0 me-2">Don't have an account?</p>
+                                    <button type="button" class="btn btn-outline-danger">Create new</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3 class="register-heading">Apply as a Hirer</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" maxlength="10" minlength="10" class="form-control"
+                                    placeholder="Phone *" value="" />
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option class="hidden" selected disabled>Please select your Sequrity Question
+                                    </option>
+                                    <option>What is your Birthdate?</option>
+                                    <option>What is Your old Phone Number</option>
+                                    <option>What is your Pet Name?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="`Answer *" value="" />
+                            </div>
+                            <input type="submit" class="btnRegister" value="Register" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->

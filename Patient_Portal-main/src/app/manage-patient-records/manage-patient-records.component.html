@@ -1,0 +1,179 @@
+<app-admin-header></app-admin-header>
+<div class="row">
+  <div class="col-md-3">
+    <app-admin-navigation></app-admin-navigation>
+  </div>
+  <div class="col-md-9" style="padding-top: 74px">
+    <div class="container">
+
+      <div class="col-md-12 border" style="box-shadow: 0 0 15px 1px rgb(0 0 0 / 40%);" >
+        <br>
+        <p-table responsiveLayout="scroll"  *ngIf='!displayDetails' [value]="patientDetails" [paginator]="true" [rows]="5"
+        [rowsPerPageOptions]="[5,10,15,20]" [totalRecords]="totalRecords" pageLinkSize="3" >
+        
+        <ng-template pTemplate="header">
+          <tr>
+
+            <th  class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="firstname">Patient Name <p-sortIcon field="firstname"></p-sortIcon></th>
+            <th  class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;">Contact Number </th>
+            <th  class="text-uppercase" style=" background-color: #59cbe5;font-weight: 700;" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+            <th  class="text-uppercase text-center" style=" background-color: #59cbe5;font-weight: 700;">View Details</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-details>
+          <tr>
+
+            <td style="background-color: #bddee570; font-weight: 600;">{{details.firstname}} {{details.lastname}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;">{{details.phone}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;">{{details.email}}</td>
+            <td style="background-color: #bddee570; font-weight: 600;"><button class="btn btn-default btn-xs"><span><i class="fa fa-eye"
+                    (click)='viewDetails(details)'></i></span></button></td>
+          </tr>
+
+        </ng-template>
+      </p-table>
+
+
+
+      <div class="layout-content" *ngIf='displayDetails' >
+        <i (click)='back()' class="fa fa-arrow-left fa-2x float-left"></i>
+
+        <div class="container flex-grow-1 container-p-y" >
+          <div class="container-m-nx container-m-ny theme-bg-white mb-1">
+            <div class="media col-md-10 col-lg-8 col-xl-7">
+              <img src="assets/Images/user.png" alt="" class="d-block ui-w-100 rounded-circle">
+              <div class="media-body ml-3">
+                <h4 class="font-weight-bold mb-4 text-uppercase">{{patientDemographic.firstname}} {{patientDemographic.lastname}}
+                </h4>
+                <div class="text-muted mb-4">
+                  {{patientDemographic.firstname}} {{patientDemographic.lastname}} has registered Citiustech Patient
+                  Portal on {{patientDemographic.regDate |  date:'longDate'}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="col">
+
+            <div class="card mb-1">
+              <div class="card-header text-uppercase" style="font-weight: bold;">Patient Summary
+
+              </div>
+              <div class="card-body">
+
+                <div class="row mb-2">
+                  <div  class="col-md-6 text-uppercase"> <i class="fa fa-user fa-fw text-primary pr-2" aria-hidden="true"></i>
+                    <span style="font-weight: bold;">Username :</span> {{patientDemographic.username}}
+                  </div>
+                  <div  class="col-md-6 text-uppercase"><i class="fa fa-envelope fa-fw text-primary pr-2"  aria-hidden="true"></i>
+                    <span style="font-weight: bold;"> Email ID : </span> {{patientDemographic.email}}
+                  </div>
+                  <div  class="col-md-6 text-uppercase"><i class="fa fa-globe fa-fw text-primary pr-2" aria-hidden="true"></i>
+                    <span style="font-weight: bold;">Ethnicity : </span> {{patientDemographic.demographics.ethnicity}}
+                  </div>
+                  <div  class="col-md-6 text-uppercase"> <i class="fa fa-map-marker fa-fw text-primary pr-2" aria-hidden="true"></i>
+                    <span style="font-weight: bold;">Location : </span> {{patientDemographic.demographics.address}}
+                  </div>
+                  <div  class="col-md-6 text-uppercase"> <i class="fa fa-calendar fa-fw text-primary pr-2" aria-hidden="true"></i>
+                    <span style="font-weight: bold;">DOB :</span> {{patientDemographic.dob}}
+                  </div>
+                  <div  class="col-md-6 text-uppercase"><i class="fa fa-phone-square fa-fw text-primary pr-2" aria-hidden="true"></i>
+                    <span style="font-weight: bold;">Contact :</span> {{patientDemographic.phone}}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="card  mb-1">
+              <div class="card-header text-uppercase" style="font-weight: bold;">Patient Vitals</div>
+              <div class="card-body">
+
+                <div class="row mb-2">
+                  <div class="col-md-3 text-center" style="font-weight: 500;">Blood Presssure
+                    <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span>
+                      </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                      <div class="progress-value">{{patientDemographic.demographics.bloodPressure}}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 text-center" style="font-weight: 500;">Pulse Rate
+                    <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span>
+                      </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                      <div class="progress-value">{{patientDemographic.demographics.pluseRate}} bpm</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 text-center" style="font-weight: 500;">Weight
+                    <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span>
+                      </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                      <div class="progress-value">{{patientDemographic.demographics.weight}} kg</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 text-center" style="font-weight: 500;">Height
+                    <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span>
+                      </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                      <div class="progress-value">{{patientDemographic.demographics.height}} ft</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="card  mb-1">
+              <div class="card-header text-uppercase" style="font-weight: bold;">Patient Appoinments</div>
+              <div class="col-md-6 col-lg-12 pt-3 stretch-card">
+                <div class="card card-rounded" style=" height: 250px; box-shadow: 0 0 25px 1px rgba(0, 0, 0, .3);">
+
+                  <div class="card-body" style="overflow-y: auto !important;">
+                    <div class="row ">
+
+                      <div class="col-sm-12">
+                        <div>
+                          <div class="row row-striped" *ngFor="let data of patientDemographic.sceduledAppointments">
+                            <div class="col-2 text-right d-sm-none d-none d-md-block d-lg-block d-lg-block">
+                              <h1 class="display-4"><span
+                                  class="badge badge-secondary">{{data.dateAndTime|date:'dd'}}</span></h1>
+                              <h2>{{data.dateAndTime|date:'MMM'}}</h2>
+                            </div>
+                            <div class="col-10">
+                              <h3 style='font-size:19px' class="text-muted"><strong>Appointment with
+                                  {{data.physicianName}}</strong></h3>
+                              <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                                  {{data.dateAndTime|date:'EEEE'}}</li>
+                                <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                                  {{data.dateAndTime|date:'mediumTime'}}</li>
+                                <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                  Virtual</li>
+                              </ul>
+                              <p>You have appointment scheduled for "{{data.type}}"</p>
+                            </div>
+                          </div>
+                          <span *ngIf="patientDemographic.sceduledAppointments.length==0">No Appointments
+                            Scheduled</span>
+                        </div>
+                      </div>
+                    </div><br /><br />
+
+                  </div>
+                </div>
+              </div> <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+    "userDetails":[
+        {
+            "username":"vishwanthk",
+            "password":"login123",
+            "role":"Patient"
+        },
+        {
+            "username":"varshab",
+            "password":"login123",
+            "role":"Patient"
+
+        },{
+            "username":"amolb",
+            "password":"login123",
+            "role":"Patient"
+
+        },{
+            "username":"ashwinij",
+            "password":"login123",
+            "role":"Patient"
+        },
+        {
+            "username":"admin",
+            "password":"admin123",
+            "role":"Admin"
+        }
+    ]
+}

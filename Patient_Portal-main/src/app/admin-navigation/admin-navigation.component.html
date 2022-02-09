@@ -1,0 +1,604 @@
+<!-- <div style="border: 2px solid black;" class="m-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active m-3 p-3 text-center" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Dashboard</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Manage Patient Records</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Manage Physician Records</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Manage Appointments</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Billing</a>
+
+    </div>
+    </div> -->
+
+
+<!-- <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+                <strong>BS</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-briefcase"></i>
+                        About
+                    </a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        Pages
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-image"></i>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question"></i>
+                        FAQ
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-paper-plane"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
+
+    
+    </div> -->
+
+
+
+<nav class="navbar navbar-expand-lg fixed-top shadow navbar-dark navbar-offcanvas"
+  style="background-color: transparent;">
+
+
+
+
+
+  <div style="width: 100%;">
+    
+    <div class="row  " style="background-color: white;">
+
+      <div class="col-4">
+        <button class="navbar-toggler d-block collapse-button float-left dis d-lg-none" type="button" (click)="toggleClick()"
+          style="background-color: #6d88d5;margin-top: 10px;margin-left: 10px;">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <img src="assets/Images/logo.png" class="img-fluid ml-3 float-left" alt="logo">
+
+      </div>
+      <!-- <div class="col  py-2">
+
+        <h3 class="text-center text-primary">Welcome "Admin"</h3>
+      </div> -->
+      <div class="col py-2">
+        <a [routerLink]="['/login']">
+        <!-- <i class="fa fa-bell-o  fa-2x float-right" aria-hidden="true"> <span class="badge badge-light "
+          style="border-radius: 3.8rem;">4</span></i> -->
+          <i class="fa fa-sign-out  fa-2x float-right px-4" aria-hidden="true"></i>
+        </a>
+        
+
+
+        <!-- Example single danger button -->
+        <!-- <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div> -->
+
+        <!-- <a class="btn btn-link float-right mr-5 dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div> -->
+      </div>
+    </div>
+    <!--  
+    <p-menubar >
+      <button class="navbar-toggler d-block collapse-button float-left" type="button" (click)="toggleClick()" style="background-color: #6d88d5;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="p-menubar-end">
+       
+        <input type="text" class=" float-right" pInputText placeholder="Search">
+        <button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
+      
+      </div>
+
+      
+    </p-menubar> -->
+
+  </div>
+
+
+  <!-- 
+          <div class="col-md-4">
+              <img src="assets/Images/logo.png" class="img-fluid ml-3" alt="logo">
+          </div>
+          <div class="col-md-4 py-2">
+              <h3 class="text-center text-primary">Welcome "Admin"</h3>
+          </div>
+          <div class="col-md-4 py-2">
+              <button type="button" class="btn btn-primary ml-5">
+                  Notifications <span class="badge badge-light">4</span>
+              </button>
+              <a class="btn btn-link float-right mr-5 dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+              </div>
+          </div> -->
+
+
+  <div [class]="sideToggle ? 'navbar-collapse offcanvas-collapse open' :  'navbar-collapse offcanvas-collapse'"
+    style="margin-top: 10px;">
+    <!-- <ul class="navbar-nav mr-auto" style="padding-top: 20px;">
+                    <li class="nav-item active ">
+                        <a  href="javascript:void(0)">Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
+                    <hr>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Manage Patient Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Manage Physician Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" >Manage Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="javascript:void(0)">Billing</a>
+                  </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                        </div>
+                    </li>
+                </ul> -->
+                <ng-container *ngIf="userDetails.role=='Admin'">
+                  <div class="vertical-nav bg-white " id="sidebar">
+                    <div class="py-4 px-3 mb-4 bg-light">
+                      <div class="media d-flex align-items-center"><img src="assets/Images/img_avatar.png" width="65"
+                          class="mr-3 rounded-circle img-thumbnail shadow-sm">
+                        <div class="media-body">
+                          <h4 class="m-0">{{userDetails.username}}</h4>
+                        </div>
+                      </div>
+                    </div>
+            
+                    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+            
+                    <ul class="nav flex-column bg-white mb-0">
+                      <li class="nav-item">
+                        <a  [routerLink]="['/dashboard']" class="nav-link text-dark font-italic bg-light">
+                          <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                          Dashboard
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a [routerLink]="['/patientRecords']" class="nav-link text-dark font-italic bg-light">
+                          <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                           Patient Records
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a [routerLink]="['/physicianRecords']" class="nav-link text-dark font-italic bg-light">
+                          <i class="fa fa-file mr-3 text-primary fa-fw"></i>
+                          Manage Physician Records
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a  [routerLink]="['/manageAppointments']" class="nav-link text-dark font-italic bg-light">
+                          <i class="fa fa-calendar-check-o mr-3 text-primary fa-fw"></i>
+                           Appointment Records
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a [routerLink]="['/serviceRequest']" class="nav-link text-dark font-italic bg-light">
+                          <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                           Service Requests
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </ng-container>
+    <ng-container *ngIf="userDetails.role=='Patient'">
+      <div class="vertical-nav bg-white " id="sidebar">
+        <div class="py-4 px-3 mb-4 bg-light">
+          <div class="media d-flex align-items-center"><img src="assets/Images/img_avatar.png" width="65"
+              class="mr-3 rounded-circle img-thumbnail shadow-sm">
+            <div class="media-body">
+              <h4 class="m-0">{{userDetails.username}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a [routerLink]="['/dashboard']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/profile']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              My Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/sceduleappointments']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-calendar-check-o mr-3 text-primary fa-fw"></i>
+             Schedule Appointment
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/appointmentHistory']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-history mr-3 text-primary fa-fw"></i>
+              Appointment History
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/medications']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-medkit mr-3 text-primary fa-fw"></i>
+              Medication and Allergies
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/immunization']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-heartbeat mr-3 text-primary fa-fw"></i>
+              Immunization Details
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/orders']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-thermometer-quarter mr-3 text-primary fa-fw"></i>
+              Patient Vitals & Order's
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-first-order mr-3 text-primary fa-fw"></i>
+              Order
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a [routerLink]="['/demographics']" [routerLink]="['/demographics']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-info mr-3 text-primary fa-fw"></i>
+              Demographics
+            </a>
+          </li>
+        </ul>
+<!-- 
+        <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Billing</p>
+
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a href="#" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-credit-card-alt mr-3 text-primary fa-fw"></i>
+              Billing Request
+            </a>
+          </li>
+        </ul> -->
+      </div>
+    </ng-container>
+    <ng-container *ngIf="userDetails.role=='Physician'">
+      <div class="vertical-nav bg-white " id="sidebar">
+        <div class="py-4 px-3 mb-4 bg-light">
+          <div class="media d-flex align-items-center"><img src={{profile_img}} width="65"
+              class="mr-3 rounded-circle img-thumbnail shadow-sm">
+            <div class="media-body">
+              <h4 class="m-0">{{userDetails.username}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a [routerLink]="['/dashboard']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/patientDetails']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              View Patient Details
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/raiseTicket']" class="nav-link text-dark font-italic bg-light">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              Raise Ticket
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+
+
+  </div>
+</nav>
+
+
+
+
+
+
+
+<!-- <div style="border: 2px solid black;" class="m-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active m-3 p-3 text-center" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Dashboard</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Manage Patient Records</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Manage Physician Records</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Manage Appointments</a>
+        <a class="nav-link m-3 p-3 text-center" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Billing</a>
+
+    </div>
+    </div> -->
+
+<!-- Vertical navbar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="page-wrapper chiller-theme">
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+            <div class="sidebar-brand">
+              <a href="#">pro sidebar</a>
+              <div id="close-sidebar">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+            <div class="sidebar-header">
+              <div class="user-pic">
+                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                  alt="User picture">
+              </div>
+              <div class="user-info">
+                <span class="user-name">Jhon
+                  <strong>Smith</strong>
+                </span>
+                <span class="user-role">Administrator</span>
+                <span class="user-status">
+                  <i class="fa fa-circle"></i>
+                  <span>Online</span>
+                </span>
+              </div>
+            </div>
+           
+            <div class="sidebar-search">
+              <div>
+                <div class="input-group">
+                  <input type="text" class="form-control search-menu" placeholder="Search...">
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="sidebar-menu">
+              <ul>
+                <li class="header-menu">
+                  <span>General</span>
+                </li>
+                <li class="sidebar-dropdown">
+                  <a href="#">
+                    <i class="fa fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    <span class="badge badge-pill badge-warning">New</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                    <ul>
+                      <li>
+                        <a href="#">Dashboard 1
+                          <span class="badge badge-pill badge-success">Pro</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">Dashboard 2</a>
+                      </li>
+                      <li>
+                        <a href="#">Dashboard 3</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="sidebar-dropdown">
+                  <a href="#">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>E-commerce</span>
+                    <span class="badge badge-pill badge-danger">3</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                    <ul>
+                      <li>
+                        <a href="#">Products
+      
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">Orders</a>
+                      </li>
+                      <li>
+                        <a href="#">Credit cart</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="sidebar-dropdown">
+                  <a href="#">
+                    <i class="far fa-gem"></i>
+                    <span>Components</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                    <ul>
+                      <li>
+                        <a href="#">General</a>
+                      </li>
+                      <li>
+                        <a href="#">Panels</a>
+                      </li>
+                      <li>
+                        <a href="#">Tables</a>
+                      </li>
+                      <li>
+                        <a href="#">Icons</a>
+                      </li>
+                      <li>
+                        <a href="#">Forms</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="sidebar-dropdown">
+                  <a href="#">
+                    <i class="fa fa-chart-line"></i>
+                    <span>Charts</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                    <ul>
+                      <li>
+                        <a href="#">Pie chart</a>
+                      </li>
+                      <li>
+                        <a href="#">Line chart</a>
+                      </li>
+                      <li>
+                        <a href="#">Bar chart</a>
+                      </li>
+                      <li>
+                        <a href="#">Histogram</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="sidebar-dropdown">
+                  <a href="#">
+                    <i class="fa fa-globe"></i>
+                    <span>Maps</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                    <ul>
+                      <li>
+                        <a href="#">Google maps</a>
+                      </li>
+                      <li>
+                        <a href="#">Open street map</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="header-menu">
+                  <span>Extra</span>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-book"></i>
+                    <span>Documentation</span>
+                    <span class="badge badge-pill badge-primary">Beta</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-calendar"></i>
+                    <span>Calendar</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-folder"></i>
+                    <span>Examples</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          
+          </div>
+         
+        </nav>
+  
+      
+      </div>
+</div> -->
